@@ -1,0 +1,371 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
+/* 
+font-family: 'Merriweather', serif;
+font-family: 'Libre Franklin', sans-serif;
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    background-color: #F8F8F8;
+    margin-bottom: 2px;
+    height: 100%;
+    width: 100%;
+}
+
+.header{
+
+}
+
+.form_header{
+    display: flex;
+    background-color: #0A1D42;
+    padding: 3%;
+    justify-content: space-between;
+}
+
+.form_header > img{
+    width: 100px;
+    height: 100px;
+    flex: 0.5 0 16%;
+}
+
+.nav_links{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    flex-direction: column;
+    margin-right: 10%;
+}
+
+.nav_links li{
+    flex: 1;
+    align-self: center;
+    font-family: 'Libre Franklin', sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 2em;
+    transition: all 0.3s ease 0;
+
+}
+
+.nav_links > li > button{
+    /* flex: 1; */
+    cursor: pointer;
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    padding: 9px 25px;
+    background-color: rgba(253, 206, 47, 1);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0;
+}
+
+
+/* ----------- */
+/* FORM CSS */
+/* ----------- */
+
+
+.apply-form{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 5%;
+}
+
+.apply-form > p{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5%;
+}
+
+.apply-form > p > label{
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+    padding-bottom: 2%;
+    margin-left: 2%;
+}
+
+.apply-form > p > input{
+    outline: none;
+    border: oldlace;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 9px 25px;
+    height: 20px;
+} 
+
+.apply-form > p > textarea{
+    outline: none;
+    border: oldlace;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 9px 25px;
+    height: 20px;
+}
+
+
+.apply-form > p > input:focus{
+    box-shadow: 0 0 4px rgba(10, 29, 66,0.5);
+    border: 1px solid rgba(10, 29, 66,0.5);
+}
+
+.courses-list{
+    padding-bottom: 5%;
+}
+
+.courses-list > .heading-course-list{
+    display: flex;
+}
+
+.courses-list > .heading-course-list > h2{
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    padding-bottom: 2%;
+    margin-left: 2%;
+    padding-right: 3%;
+}
+
+.courses-list > .heading-course-list > em{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.table_course_list{
+    display: flex;
+    /* justify-content: space-evenly; */
+    flex-direction: column;
+    list-style: none;
+    /* margin-right: auto; */
+    /* border: 5px orange dotted; */
+}
+
+.inside_course_list{
+    display: flex;
+    /* justify-content: space-evenly; */
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.inside_course_list > label{
+    flex-grow: 1;
+}
+
+.table_course_list > p{
+    margin-left: auto;
+}
+
+[type="checkbox"]{
+    display: none;
+    border: 0; 
+    clip: rect(0 0 0 0); 
+    /* height: 1px; margin: -1px;  */
+    /* overflow: hidden;  */
+    padding: 0; 
+    /* position: absolute;  */
+    /* width: 20px; */
+}
+
+label {
+    cursor: pointer;
+}
+
+.inside_course_list > label > span{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: px;
+    font-weight: 100;
+}
+
+.inside_course_list > p > label > span{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: px;
+    font-weight: 100;
+    border-bottom: 2px dotted #707070 ;
+}
+
+[type="checkbox"] + span:before{
+    content: '. . .';
+    border-radius:.25em;
+    border: 0.125em solid #fff;
+    box-shadow: 0 0 0 0.15em #555;
+    transition: 0.5s ease all;
+    background: rgb(255, 255, 255);
+}
+
+[type="checkbox"] + span:before {
+    margin-right: 0.75em;
+}
+
+[type="checkbox"]:checked + span:before{
+    background: steelblue;
+    box-shadow: 0 0 0 0.25em #666;
+}
+
+.submit_button{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3%;
+}
+
+button[type="submit"]{
+    cursor: pointer;
+    font-family: 'Merriweather', serif;
+    font-size: x-large;
+    padding: 9px 25px;
+    background-color: rgba(253, 206, 47, 1);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0;
+    width: 12%;
+    /* flex-grow: 1; */
+}
+
+.submit_button > button > a{
+    text-decoration: none;
+    color: #0A1D42;
+}
+
+footer > ul{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* padding: 0 0.2%; */
+    background-color: #1F202E;
+}
+
+
+footer > ul > li{
+    list-style: none;
+    width: 7%;
+    margin-right: 3%;
+}
+
+footer > ul > li > .footer__a{
+    list-style: none;
+    font-size: 10px;
+    font-family:'Libre Franklin', sans-serif;
+    font-weight: 300;
+    padding-right: 5%;
+    color: rgba(255, 255, 255, 1);;
+    text-decoration: underline;
+    cursor: pointer;
+    width: 7%;
+}
+
+footer > ul > li > img{
+    width: 50px;
+    height: 50px;
+    margin-left: 50px;
+} 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

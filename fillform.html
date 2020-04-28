@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUDIC Course Form</title>
+    <link rel="stylesheet" href="/CSS/fillForm.css">
+</head>
+<body>
+    <header>
+        <nav class="form_header">
+            <img class="main_logo" src='/IMG/logo.svg' alt="">
+            <ul class="nav_links">
+                <li>Your Application</li>
+                <li><button>April 25-27</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    
+    <section class="apply-form">
+        <p>
+            <label for="name">
+                <span>Name: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="name" name="username">
+        </p>
+        <p>
+            <label for="email">
+                <span>Email: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="email" id="email" name="email">
+        </p>
+        <p>
+            <label for="">
+                <span>Password: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="password" id="pwd" name="password">
+        </p>
+        <section class="courses-list">
+           <div class="heading-course-list"> 
+                <h2>Select courses in here</h2>
+                <em>( pick all that match )</em>
+            </div>
+
+            <ul class='table_course_list'> 
+                <li class="inside_course_list"> <!-- For Checkbox -->
+                    <label class="checkboxContainer" for="title_1">
+                        <input type="checkbox" id="title_1" name=title value="K">
+                        <span class='checkmark'>Designing product packaging  </span>
+                    </label>
+                    <p>  <!-- For Dates -->
+                        <label for="date">
+                            <span class='date_dotted'>15 May 2020</span>
+                        </label>
+                    </p>
+                </li>
+                <li class="inside_course_list"> <!-- For Checkbox -->
+                    <label class="checkboxContainer" for="title_2">
+                        <input type="checkbox" id="title_2" name=title value="K">
+                        <span class='checkmark'>Design Thinking  </span>
+                    </label>
+                    <p>  <!-- For Dates -->
+                        <label for="date">
+                            <span class='date_dotted'>15 May 2020</span>
+                        </label>
+                    </p>
+                </li>
+                <li class="inside_course_list"> <!-- For Checkbox -->
+                    <label class="checkboxContainer" for="title_3">
+                        <input type="checkbox" id="title_3" name=title value="K">
+                        <span class='checkmark'>2D & 3D product designing  </span>
+                    </label>
+                    <p>  <!-- For Dates -->
+                        <label for="date">
+                            <span class='date_dotted'>15 May 2020</span>
+                        </label>
+                    </p>
+                </li>
+                <li class="inside_course_list"> <!-- For Checkbox -->
+                    <label class="checkboxContainer" for="title_4">
+                        <input type="checkbox" id="title_4" name=title value="K">
+                        <span class='checkmark'>Electronics product designing  </span>
+                    </label>
+                    <p>  <!-- For Dates -->
+                        <label for="date">
+                            <span class='date_dotted'>15 May 2020</span>
+                        </label>
+                    </p>
+                </li>
+                <li class="inside_course_list"> <!-- For Checkbox -->
+                    <label class="checkboxContainer" for="title_5">
+                        <input type="checkbox" id="title_5" name=title value="K">
+                        <span class='checkmark'>Design Innovation  </span>
+                    </label>
+                    <p>  <!-- For Dates -->
+                        <label for="date">
+                            <span class='date_dotted'>15 May 2020</span>
+                        </label>
+                    </p>
+                </li>
+            </ul>
+        </section>
+            <p>
+                <label for="course_reason">
+                    <span>Why do you want to attend this course?</span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <textarea name="" id="course_reason" cols="10" rows="10"></textarea>
+            </p>
+            <p>
+                <label for="learning">
+                    <span>How did you know about this course?</span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="text" id="learning" name="username">
+            </p>
+    </section>
+    <div class="submit_button">
+    <button type="submit"><a href="#">Submit</a></button>
+    </div>
+
+    <footer>
+        <ul>
+            <li><img src="/IMG/logo.svg" alt="dudic-logo"></li>
+            <li><a class='footer__a' href="#">Privacy Policy</a></li>
+            <li><a class='footer__a' href="#">Terms of Usage</a></li>
+        </ul>
+
+    </footer>    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+<!-- 
+        <section class="apply-form">
+        <article class="form-list"> 
+        <label>Name</label>
+        <input type="text" name="name" placeholder="Full Name Please">
+        </article>
+
+        <article class="form-list"> 
+        <label>Enter your Email id</label>
+        <input type="email" name="email" placeholder="Enter your Email id">
+        </article>
+
+        <article class="form-list"> 
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Password for login">
+        </article>
+
+        <article class="courses-list">
+        <label class="radio-header">Select courses in here</label>
+            <label class="course-table">
+            <input type="radio" name="C1" value="DUDIC01B2">Designing product packaging
+            </label>
+            <label class="course-table">
+            <input type="radio" name="C1" value="DUDIC02B2">Design Thinking
+            </label>
+        </article>
+
+        <label>Why do you want to attend this course?</label>
+        <textarea name="message" placeholder="Please be precise"></textarea>
+
+        <label>How did you know about this course?</label>
+        <input type="text" name='hear_about_us' placeholder="">
+        
+        <button type="submit" name="submit">Submit</button>
+    </section> 
+-->
+
+
+</body>
+</html>
