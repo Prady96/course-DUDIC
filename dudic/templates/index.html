@@ -42,7 +42,9 @@
                 <li><a href="#scroll_about">About</a></li>
                 <li><a href="#scroll_faq">FAQs</a></li>
                 <li><a href="#scroll_Instructors">Instructors</a></li>
-                <li><a href="http://course.dudic.io/login/"><button>Apply</button></a></li>
+                <li><a href="{% url 'login:index' %}"><button>Apply</button></a></li>
+                <!-- <li><a href="http://course.dudic.io/login/"><button>Apply</button></a></li> -->
+            
             </ul>
         </nav>
     </header>
@@ -260,7 +262,7 @@
         <ul>
             <li><img src="{% static 'IMG/logo.svg'%}" alt="dudic-logo"></li>
             <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Usage</a></li>
+            <!-- <li><a href="#">Terms of Usage</a></li> -->
         </ul>
 
     </footer>    

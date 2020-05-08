@@ -30,7 +30,8 @@
                 <span>Name: </span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="name" name="name">
+            {{ form.name }}
+            <!-- <input type="text" id="name" name="name"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.name.errors }}</li>
@@ -42,9 +43,10 @@
         <p>
             <label for="education">
                 <span>Education: </span>
-                <!-- <strong><abbr title="required">*</abbr></strong> -->
+                <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="education" name="education">
+            {{ form.education }}
+            <!-- <input type="text" id="education" name="education"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.education.errors }}</li>
@@ -57,7 +59,8 @@
                 <span>Age: </span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="age" name="age">
+            {{ form.age }}
+            <!-- <input type="text" id="age" name="age"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.age.errors }}</li>
@@ -70,7 +73,8 @@
                 <span>Address: </span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="address" name="address">
+            {{ form.address }}
+            <!-- <input type="text" id="address" name="address"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.address.errors }}</li>
@@ -83,10 +87,11 @@
                 <span>Phone: </span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="phone" name="mobile_num">
+            {{ form.mobile_num }}
+            <!-- <input type="text" id="phone" name="mobile_num"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
-                <li>{{ form.phone_number.errors }}</li>
+                <li>{{ form.mobile_num.errors }}</li>
             </ul>          
             <!-- end error block validation -->
         </p>
@@ -96,7 +101,8 @@
                 <span>Email: </span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="email" id="email" name="email">
+            {{ form.email }}
+            <!-- <input type="email" id="email" name="email"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.email.errors }}</li>
@@ -109,7 +115,8 @@
                 <span>Please Enter your Institute/University/Startup</span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <input type="text" id="instituteOrStartup" name="instituteOrStartup">
+            {{ form.instituteOrStartup }}
+            <!-- <input type="text" id="instituteOrStartup" name="instituteOrStartup"> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.instituteOrStartup.errors }}</li>
@@ -123,7 +130,8 @@
                 <span class="help_text"></span>
                 <strong><abbr title="required">*</abbr></strong>
             </label>
-            <textarea type="text" id="student_details" name="student_details" cols="10" rows="10"></textarea>
+            {{ form.student_details }}
+            <!-- <textarea type="text" id="student_details" name="student_details" cols="10" rows="10"></textarea> -->
             <!-- validation error block start -->
             <ul class="errorlist">
                 <li>{{ form.student_details.errors }}</li>
@@ -175,7 +183,8 @@
                     <span>Why do you want to attend this course?</span>
                     <strong><abbr title="required">*</abbr></strong>
                 </label>
-                <textarea name="reason" id="course_reason" cols="10" rows="10"></textarea>
+                {{ form.reason }}
+                <!-- <textarea name="reason" id="course_reason" cols="10" rows="10"></textarea> -->
                 <!-- validation error block start -->
                 <ul class="errorlist">
                     <li>{{ form.reason.errors }}</li>
@@ -188,7 +197,8 @@
                     <span>How did you know about this course?</span>
                     <strong><abbr title="required">*</abbr></strong>
                 </label>
-                <input type="text" id="learning" name="hear_about">
+                {{ form.hear_about }}
+                <!-- <input type="text" id="learning" name="hear_about"> -->
                 <!-- validation error block start -->
                 <ul class="errorlist">
                     <li>{{ form.hear_about.errors }}</li>
