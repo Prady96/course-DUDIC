@@ -21,7 +21,7 @@ html, body{
 
 .form_header{
     display: flex;
-    background-color: #0A1D42;
+    background-color: #1F202E;
     padding: 3%;
     justify-content: space-between;
 }

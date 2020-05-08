@@ -17,7 +17,20 @@ html, body{
     margin-bottom: 2px;
     height: 100%;
     width: 100%;
+    /* scroll-behavior: smooth; */
 }
+
+#scroll_faq{
+    margin-top: 100%;
+    padding-bottom: 25%;
+}
+
+#scroll_Instructors{
+    margin-top: 100%;
+    padding-bottom: 25%;
+}
+
+
 
 .outside-container{
     display: flex;
@@ -91,6 +104,7 @@ html, body{
 .landing-heading{
     display: flex;
     flex-direction: column;
+    text-align: justify;
 
 }
 
@@ -183,6 +197,7 @@ html, body{
 .courses > .courses-list > ul > li{
     align-self: flex-start;
     padding-bottom: 3%;
+    text-align: justify;
 }
 
 .courses > .courses-list > ul > li > button{

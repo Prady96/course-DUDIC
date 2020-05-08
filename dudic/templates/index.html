@@ -6,16 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/final_copy.css'%}">
     <title>DUDIC Website</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          // Add smooth scrolling to all links
+          $("a").on('click', function(event) {
+        
+            // Make sure this.hash has a value before overriding default behavior
+            if (this.hash !== "") {
+              // Prevent default anchor click behavior
+              event.preventDefault();
+        
+              // Store hash
+              var hash = this.hash;
+        
+              // Using jQuery's animate() method to add smooth page scroll
+              // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+              $('html, body').animate({
+                scrollTop: $(hash).offset().top
+              }, 800, function(){
+           
+                // Add hash (#) to URL when done scrolling (default click behavior)
+                window.location.hash = hash;
+              });
+            } // End if
+          });
+        });
+        </script>
 </head>
 <body>
     <header>
         <nav class='landing_header'>
             <img class='main_logo' src="{% static 'IMG/logo.svg'%}" alt="dudic-logo">
             <ul class='nav_links'>
-                <li><a href="#">About</a></li>
-                <li><a href="#">FAQs</a></li>
-                <li><a href="#">Instructors</a></li>
-                <li><a href="http://35.200.158.84:8000/login/"><button>Apply</button></a></li>
+                <li><a href="#scroll_about">About</a></li>
+                <li><a href="#scroll_faq">FAQs</a></li>
+                <li><a href="#scroll_Instructors">Instructors</a></li>
+                <li><a href="http://course.dudic.io/login/"><button>Apply</button></a></li>
             </ul>
         </nav>
     </header>
@@ -34,7 +61,7 @@
                 </ul>
             </section>
 
-            <section class="courses">
+            <section id='scroll_about' class="courses">
                 <h2>Courses</h2>
 
                 <article class="courses-list">
@@ -108,12 +135,12 @@
 
             </section>
 
-            <section class="courseInstructors">
+            <section id='scroll_Instructors' class="courseInstructors">
                 <h2>Course Instructors</h2>
 
                 <article class="img_p_display">
-                    <img src="{% static 'IMG/Mask Group 23.png'%}" alt="Roopinder Oberoi">
-                    <p>I am a permanent teaching faculty at Department of Political Science, Kirori Mal College University of Delhi. I specialize in Political Science, Corporate Social Responsibility, Sustainable Development and Social Enterprise. In 2009 I was awarded a Post-Doctorate Research Fellowship and have recently completed course on Entrepreneurship in Emerging Economies from HarvardX and Course on Social Entrepreneurship from University of Oxford. I am currently working with British Council project on Social Enterprise and Higher Education. I am the Founding Member of Centre of Innovation and Social Enterprise, KMC, University of Delhi.
+                    <img src="{% static 'IMG/Dr_Roopinder_Oberoi.png'%}" alt="Roopinder Oberoi">
+                    <p>I am Dr. Roopinder Oberoi, a faculty at Department of Political Science, Kirori Mal College, University of Delhi. I specialize in Political Science, Corporate Social Responsibility, Sustainable Development and Social Enterprises. In 2009 I was awarded a Post-Doctorate Research Fellowship and have recently completed course on Entrepreneurship in Emerging Economies from HarvardX and Course on Social Entrepreneurship from University of Oxford. I am currently working with British Council project on Social Enterprise and Higher Education. I am the Founding Member of Centre of Innovation and Social Enterprise, KMC, University of Delhi.
                         I have authored and edited 4 books on Corporate Social Responsibility and Sustainable Development in Emerging Economies, Lexington Publisher, USA (2015), Globalization Reappraised: A false Oracle or a talisman? Vajpeyi, D and Oberoi, R, Lexington Books, USA, (2017) Revisiting Globalization: From Borderless to Gated Globe, Springer, UK (2018). Forthcoming Book Social Enterprise in the Higher Education Sector (2020)</p>
                 </article>
 
@@ -124,32 +151,32 @@
                 </article>
 
                 <article class="img_p_display">
-                    <img src="{% static 'IMG/akansha.svg'%}" alt="Akansha-Jhangid">
-                    <p>Hi! I am Akanksha Jangid. I am a Graphic Designer with a focus on Brand and packaging design. After graduating with a BSc. degree in Animation & Multimedia from Birla Institute of Technology, Jaipur, I worked as a Freelancer for a few months and currently working as a Junior Design Fellow at Delhi University Design Innovation Centre. My goal is to help people by conveying their brand's vision through design.</p>
-                </article>
-
-                <article class="img_p_display">
-                    <img src="{% static 'IMG/manish.svg'%}" alt="Manish_Tamarkar">
-                    <p>I am Junior Design Fellow at Design Innovation Center, University of Delhi with Background of Mechanical Engineering from ITM Gwalior. I have specialisation in 3D Designing, product prototyping and fabrication</p>
-                </article>
-
-                <article class="img_p_display">
-                    <img src="{% static 'IMG/debo.svg'%}" alt="Debo">
+                    <img src="{% static 'IMG/debo.png'%}" alt="Debo">
                     <p>I am Debo Prasad Baruah, a Senior Design Fellow. I did Masters of Design from NIFT New Delhi and did B.tech in Mechanical engineering and currently pursuing Masters of Psychology from IGNOU to strengthen my understanding on human centric design. I have wide range of experience from Industrial design in export houses to developing Natural dyed textile for an NGO.</p>
                 </article>
 
                 <article class="img_p_display">
-                    <img src="{% static 'IMG/tapu.svg'%}" alt="Tapadyuti">
+                    <img src="{% static 'IMG/akansha.svg' %}" alt="Akansha-Jhangid">
+                    <p>Hi! I am Akanksha Jangid. I am a Graphic Designer with a focus on Brand and packaging design. After graduating with a BSc. degree in Animation & Multimedia from Birla Institute of Technology, Jaipur, I worked as a Freelancer for a few months and currently working as a Junior Design Fellow at Delhi University Design Innovation Centre. My goal is to help people by conveying their brand's vision through design.</p>
+                </article>
+
+                <article class="img_p_display">
+                    <img src="{% static 'IMG/manish.png' %}" alt="Manish_Tamarkar">
+                    <p>I am Junior Design Fellow at Design Innovation Center, University of Delhi with Background of Mechanical Engineering from ITM Gwalior. I have specialisation in 3D Designing, product prototyping and fabrication</p>
+                </article>
+
+                <article class="img_p_display">
+                    <img src="{% static 'IMG/tapu.png' %}" alt="Tapadyuti">
                     <p>Hi! My name is Tapadyuti. I am a junior design fellow in the Design Innovation Centre. I completed my B.Tech in the domain of Electronics & Instrumentation from RCCIIT, Kolkata. My specialty is on Aerial Robotics, Embedded System & Solar product designing. I worked on a solar energy project in the National Institute of Solar Energy under Govt. of India.</p>
                 </article>
 
 
             </section>
 
-            <section class="FAQ">
+            <section id='scroll_faq' class="FAQ">
                 <h2>Frequent Asked Questions</h2>
                 <article class="Questn-Ans">
-                    <section class="Question">
+                    <!-- <section class="Question">
                         <img src="{% static 'IMG/Polygon.svg'%}" alt="polygon-image">
                         <h3>Why should you Apply?</h3>
                     </section>
@@ -157,7 +184,7 @@
                         <p>Participation in this program will be invaluable experience 
                             In your pursuit of a career in the industry and will provide 
                             you with access</p>
-                    </section>
+                    </section> -->
                 </article>
             
                 <!-- <article class="Questn-Ans">

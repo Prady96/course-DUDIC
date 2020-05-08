@@ -1,0 +1,61 @@
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=dic
+Group=dic
+WorkingDirectory=/home/dic/workplace-djangoFrontend/dudic
+ExecStart=/home/dic/workplace-djangoFrontend/venv/bin/gunicorn \
+    --access-logfile /home/dic/workplace-djangoFrontend/dudic/logs/gunicorn_main.log \
+    --workers 10 \
+    --bind unix:/home/dic/workplace-djangoFrontend/dudic/run/gunicorn_main.sock \
+    dudic.wsgi:application
+
+[Install]
+WantedBy=multi-user.target`
+
+
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=dic
+Group=dic
+WorkingDirectory=/home/dic/workplace-djangoFrontend/dudic
+ExecStart=/home/dic/workplace-djangoFrontend/venv/bin/gunicorn --access-logfile /home/dic/workplace-djangoFrontend/dudic/logs/gunicorn_main.log --workers 10 --bind unix:/home/dic/workplace-djangoFrontend/dudic/run/gunicorn_main.sock dudic.wsgi:application
+
+[Install]
+WantedBy=multi-user.target`
+
+
+
+sudo vim /etc/nginx/sites-available/dudic
+
+server {
+	listen 80;
+	server_name http://course.dudic.io/;
+	client_max_body_size 100M;
+
+	access_log /home/dic/workplace-djangoFrontend/dudic/logs/nginx-access.log;
+	error_log /home/dic/workplace-djangoFrontend/dudic/logs/nginx-error.log;
+
+	location /static/ {
+		alias	/home/dic/workplace-djangoFrontend/dudic/static/;
+        alias	/home/dic/workplace-djangoFrontend/dudic/staticfiles/;
+	}
+
+	location / {
+		include proxy_params;
+		proxy_pass http://unix:/home/dic/workplace-djangoFrontend/dudic/run/gunicorn_main.sock;
+	}
+
+}
+
+
+Reference link
+https://www.digitalocean.com/community/tutorials/how-to-set-up-django-with-postgres-nginx-and-gunicorn-on-ubuntu-16-04
+https://stackoverflow.com/a/52912818/7999665
+

@@ -100,7 +100,7 @@ def apply_page_new(request):
     return render(request, 'fillForm.html', context)
 
 
-def apply_page_new(request):
+# def apply_page_new(request):
     
 
 
