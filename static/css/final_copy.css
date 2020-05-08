@@ -12,6 +12,11 @@ font-family: 'Libre Franklin', sans-serif;
     padding: 0;
 }
 
+#scroll_Instructors{
+    margin-top: 0;
+    padding-bottom: 0;
+}
+
 html, body{
     background-color: #F8F8F8;
     margin-bottom: 2px;
@@ -19,17 +24,6 @@ html, body{
     width: 100%;
     /* scroll-behavior: smooth; */
 }
-
-#scroll_faq{
-    /* margin-top: 100%;
-    padding-bottom: 25%; */
-}
-
-#scroll_Instructors{
-    /* margin-top: 100%;
-    padding-bottom: 25%; */
-}
-
 
 
 .outside-container{

@@ -22,7 +22,7 @@ def thank_you_page(request):
     return render(request, 'thank_you.html')
 
 def success(request ,name, email, course_name, start_date, end_date, course_id):
-    print(name, email, course_name, start_date,end_date )
+    print(name, email, course_name, start_date, end_date )
 
     if course_id == 'DUDIC01B2':
         course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course6.jpg'
@@ -57,6 +57,13 @@ def success(request ,name, email, course_name, start_date, end_date, course_id):
     context = {
             'email' : email, 
     }
+
+    start_date = ''
+    end_date = ''
+
+
+
+
     return render(request, 'thank_you.html', context)
 
 
