@@ -1,4 +1,5 @@
 from django.db import models
+from phonenumber_field.modelfields import PhoneNumberField
 
 class CourseModel(models.Model):
     """ Name and Id for each course conducting under DUDIC """
@@ -47,7 +48,7 @@ class ApplicationModel(models.Model):
     education          = models.CharField(max_length=50)
     age                = models.IntegerField()
     address            = models.CharField(max_length=200)
-    mobile_num         = models.IntegerField()
+    mobile_num         = PhoneNumberField()
     email              = models.EmailField()
     reason             = models.CharField(max_length=500)
     instituteOrStartup = models.CharField(max_length=200, null=True)

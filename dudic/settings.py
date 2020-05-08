@@ -64,6 +64,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'login',
     'course',
+    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -167,8 +168,8 @@ send_mail(subject, message, from_email, recipient_list, fail_silently=False, htm
 """
 
 
-
-
+PHONENUMBER_DB_FORMAT = "NATIONAL"
+PHONENUMBER_DEFAULT_REGION = "IN"
 
 
 
