@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUDIC101</title>
+    <link rel="stylesheet" href="{% static 'css/thank_you.css' %}">
+    <script src="https://kit.fontawesome.com/30bc9d3c86.js" crossorigin="anonymous"></script>
+</head>
+<body class=convertingColorsRadialGradient>
+    <header>
+        <nav class="thank_you_header">
+            <img class="main_logo" src='{% static "IMG/brain_logo.svg" %}' alt="">
+            <div>
+                <h3>Design Innovation Center</h3>
+                <label>University of Delhi</label>
+            </div>
+        </nav>
+    </header>
+
+    <section class="thank_you_heading">
+        <article class="thank_you_heading__main">
+            <h1>That’s all, thank you!</h1>
+        </article>
+
+        <article class="thank_you_heading__mail">
+            <i class="fas fa-envelope-open-text"></i>
+            <label>You've got mail</label>
+        </article>
+    </section>
+
+    <br>
+
+    <section class="confirmation_mail_check">
+        <p>We just sent a confirmation on {{ email }}.</p>
+        <p>Once you are selected, we'll get you all set up!</p>
+        <h3>Check your mail</h3>
+    </section>
+
+    <section>
+        <article class="share_container_text">
+            <p>Have a minute? help us share the course! Follow us
+                on Instagram and like us Facebook to keep you up to
+                date with all our news and announcemnets.
+            <p>
+        </article>
+
+
+        <ul class="share_container_buttons">
+            <li><a href="https://www.facebook.com/pg/dudiclab/posts/" target="_blank"><i class="fab fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/dudiclab/" target="_blank"><i class="fab fa-instagram-square"></i></a></li>
+            <li><a href="https://twitter.com/dudiclab" target="_blank"><i class="fab fa-twitter"></i></a></li>
+        </ul>
+    </section>
+
+    <footer>
+        <li>#LearningSkillingGrowing</li>
+        <li><a href="https://dudic.io/courses/" target="_blank">www.dudic.io</a></li>
+        <li><a href="mailto:ask@dudic.io" target="_blank"></a>Contact us: ask@dudic.io</li>
+    </footer>
+
+    
+</body>
+</html>

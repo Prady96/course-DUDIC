@@ -1,0 +1,626 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300&family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100;0,500;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
+/* 
+font-family: 'Merriweather', serif;
+font-family: 'Libre Franklin', sans-serif;
+*/
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html, body{
+    background-color: #F8F8F8;
+    margin-bottom: 2px;
+    height: 100%;
+    width: 100%;
+}
+
+.form_header{
+    display: flex;
+    background-color: #0A1D42;
+    padding: 3%;
+    justify-content: space-between;
+}
+
+.form_header > img{
+    width: 100px;
+    height: 100px;
+    flex: 0.5 0 16%;
+}
+
+.nav_links{
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    flex-direction: column;
+    margin-right: 10%;
+}
+
+.nav_links li{
+    flex: 1;
+    align-self: center;
+    font-family: 'Libre Franklin', sans-serif;
+    color: rgb(255, 255, 255);
+    font-size: 2em;
+    transition: all 0.3s ease 0;
+
+}
+
+.nav_links > li > button{
+    /* flex: 1; */
+    cursor: pointer;
+    font-family: 'Merriweather', serif;
+    font-size: 20px;
+    padding: 9px 25px;
+    background-color: rgba(253, 206, 47, 1);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0;
+}
+
+
+/* ----------- */
+/* FORM CSS */
+/* ----------- */
+
+
+.apply-form{
+    margin-top: 5%;
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    margin-left: 5%;
+}
+
+.apply-form > p{
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 5%;
+}
+
+.apply-form > p > label{
+    font-family: 'Merriweather', serif;
+    font-size: 15px;
+    padding-bottom: 2%;
+    margin-left: 2%;
+    /* width: 190%; */
+}
+
+.apply-form > p > input{
+    outline: none;
+    border: oldlace;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 9px 25px;
+    height: 20px;
+    /* width: 190%; */
+} 
+
+.apply-form > p > textarea{
+    outline: none;
+    border: oldlace;
+    border-radius: 10px;
+    font-size: 15px;
+    padding: 9px 25px;
+    height: 20px;
+    /* width: 190%; */
+}
+
+
+.apply-form > p > input:focus{
+    box-shadow: 0 0 4px rgba(10, 29, 66,0.5);
+    border: 1px solid rgba(10, 29, 66,0.5);
+}
+
+.errorlist{
+    list-style: none;
+}
+
+.errorlist > li{
+    color: red;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+    font-size: small;
+}
+
+    /* ----------- */
+    /* COURSES CSS */
+    /* ----------- */
+
+.courses-list{
+    padding-bottom: 5%;
+    width: 150%;
+}
+
+.courses-list > .heading-course-list{
+    display: flex;
+    width: 150%;
+}
+
+.courses-list > .heading-course-list > h2{
+    font-family: 'Merriweather', serif;
+    font-size: 16px;
+    padding-bottom: 2%;
+    margin-left: 2%;
+    padding-right: 3%;
+}
+
+.courses-list > .heading-course-list > em{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: 14px;
+    font-weight: 100;
+    font-style: italic;
+}
+
+.table_course_list{
+    display: flex;
+    /* justify-content: space-evenly; */
+    flex-direction: column;
+    list-style: none;
+    /* margin-right: auto; */
+    /* border: 5px orange dotted; */
+}
+
+.inside_course_list{
+    display: flex;
+    /* justify-content: space-evenly; */
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.inside_course_list > label{
+    flex-grow: 1;
+}
+
+.table_course_list > p{
+    margin-left: auto;
+}
+
+.box{
+    background: #0563af;
+    color: #fff;
+    /* padding: 40px; */
+    /* height: 40%; */
+    border: none;
+    font-size: 12px;
+    padding-left: 20px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.5);
+    /* -webkit-appearance: button; */
+    border-radius: 10px;
+}
+
+.box::before{
+    background: #007ce0;
+}
+
+.box:hover::before{
+    background: #0472ca;
+}
+
+[type="radio"]{
+    display: none;
+    border: 0; 
+    clip: rect(0 0 0 0); 
+    /* height: 1px; margin: -1px;  */
+    /* overflow: hidden;  */
+    padding: 0; 
+    /* position: absolute;  */
+    /* width: 20px; */
+}
+
+label {
+    cursor: pointer;
+}
+
+.inside_course_list > label > span{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: px;
+    font-weight: 100;
+    
+}
+
+.inside_course_list > p > label > span{
+    font-family: 'Libre Franklin', sans-serif;
+    font-size: px;
+    font-weight: 100;
+    border-bottom: 2px dotted #707070 ;
+}
+
+[type="radio"] + span:before{
+    content: '. . .';
+    border-radius:.25em;
+    border: 0.125em solid #fff;
+    box-shadow: 0 0 0 0.15em #555;
+    transition: 0.5s ease all;
+    background: rgb(255, 255, 255);
+}
+
+[type="radio"] + span:before {
+    margin-right: 0.75em;
+}
+
+[type="radio"]:checked + span:before{
+    background: steelblue;
+    box-shadow: 0 0 0 0.25em #666;
+}
+
+
+
+.submit_button{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 3%;
+}
+
+button[type="submit"]{
+    cursor: pointer;
+    font-family: 'Merriweather', serif;
+    font-size: x-large;
+    padding: 9px 25px;
+    background-color: rgba(253, 206, 47, 1);
+    border: none;
+    border-radius: 50px;
+    transition: all 0.3s ease 0;
+    width: 52%;
+    /* flex-grow: 1; */
+}
+
+.submit_button > button > a{
+    text-decoration: none;
+    color: #0A1D42;
+}
+
+
+footer > ul{
+    display: flex;
+    /* justify-content: center; */
+    align-items: center;
+    /* padding: 0 0.2%; */
+    background-color: #1F202E;
+}
+
+
+footer > ul > li{
+    list-style: none;
+    width: 7%;
+    margin-right: 3%;
+}
+
+footer > ul > li > .footer__a{
+    list-style: none;
+    font-size: 10px;
+    font-family:'Libre Franklin', sans-serif;
+    font-weight: 300;
+    padding-right: 5%;
+    color: rgba(255, 255, 255, 1);;
+    text-decoration: underline;
+    cursor: pointer;
+    width: 7%;
+}
+
+footer > ul > li > img{
+    width: 50px;
+    height: 50px;
+    margin-left: 50px;
+} 
+
+@media(max-width:1000px){
+    footer > ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer > ul > li{
+        list-style: none;
+        width: 47%;
+        margin-right: 3%;
+    }
+}
+
+
+@media(max-width:768px){
+    /* *{
+        margin: 100px;
+        padding: 100px;
+        background-color: chocolate;
+    } */
+
+    .form_header > img{
+        width: 80px;
+        height: 80px;
+        flex: 0.5 0 13%;
+    }
+    
+    .nav_links{
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    .nav_links li{
+        font-size: 22px;
+    }
+
+    .nav_links > li > button{
+        font-size: 13px;
+        padding: 8px 25px;
+    }
+
+    .apply-form > p > label{
+        width: 170%;
+    }
+    .apply-form > p > input{
+        width: 190%;
+    }
+    .apply-form > p > textarea{
+        width: 190%;
+    }
+    .inside_course_list{
+        display: flex;
+        flex-direction: column;
+    }
+    .inside_course_list > label{
+        padding: 5% 0;
+        width: 140%;
+    }
+
+    .submit_button{
+        justify-content: center;
+    }
+
+    button[type="submit"]{
+        width: 140%;
+    }
+
+    footer > ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer > ul > li{
+        list-style: none;
+        width: 47%;
+        margin-right: 3%;
+    }
+
+
+}
+
+@media(max-width:414px){
+    /* *{
+        margin: 100px;
+        padding: 100px;
+        background-color: chocolate;
+    } */
+
+    .form_header > img{
+        width: 50px;
+        height: 50px;
+        flex: 0.5 0 13%;
+    }
+    
+    .nav_links{
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    .nav_links li{
+        font-size: 22px;
+    }
+
+    .nav_links > li > button{
+        font-size: 13px;
+        padding: 8px 25px;
+    }
+
+    .apply-form > p > label{
+        width: 170%;
+    }
+    .apply-form > p > input{
+        width: 190%;
+    }
+    .apply-form > p > textarea{
+        width: 190%;
+    }
+    .inside_course_list{
+        display: flex;
+        flex-direction: column;
+    }
+    .inside_course_list > label{
+        padding: 5% 0;
+        width: 140%;
+    }
+
+    .submit_button{
+        justify-content: center;
+    }
+
+    button[type="submit"]{
+        width: 120%;
+    }
+    footer > ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer > ul > li{
+        list-style: none;
+        width: 47%;
+        margin-right: 3%;
+    }
+}
+
+@media(max-width:375px){
+    /* *{
+        margin: 100px;
+        padding: 100px;
+        background-color: chocolate;
+    } */
+
+    .form_header > img{
+        width: 50px;
+        height: 50px;
+        flex: 0.5 0 13%;
+    }
+    
+    .nav_links{
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    .nav_links li{
+        font-size: 20px;
+    }
+
+    .nav_links > li > button{
+        font-size: 13px;
+        padding: 8px 18px;
+    }
+
+
+    .apply-form > p > label{
+        width: 190%;
+    }
+    .apply-form > p > input{
+        width: 190%;
+    }
+    .apply-form > p > textarea{
+        width: 190%;
+    }
+    .inside_course_list{
+        display: flex;
+        flex-direction: column;
+    }
+    .inside_course_list > label{
+        padding: 5% 0;
+        width: 140%;
+    }
+
+    .submit_button{
+        justify-content: center;
+        align-items: center;
+    }
+
+    button[type="submit"]{
+        width: 100%;
+    }
+
+    footer > ul{
+        display: flex;
+        justify-content: space-around;
+    }
+
+    footer > ul > li{
+        list-style: none;
+        width: 27%;
+        margin-right: 3%;
+    }
+
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

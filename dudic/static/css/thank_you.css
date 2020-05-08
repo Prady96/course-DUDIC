@@ -1,0 +1,521 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Signika:wght@400;600&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+html, body{
+    /* background-color: #F8F8F8; */
+    margin-bottom: 2px;
+    height: 100%;
+    width: 100%;
+    /* background-color: #1F202E; */
+}
+
+.convertingColorsRadialGradient{ 
+    background-image: radial-gradient(circle farthest-corner at center, 
+    rgba(21, 34, 47, 1) 35%, 
+    rgba(31, 32, 46, 1) 65%, 
+    rgba(40, 30, 42, 1) 100%); 
+}
+
+
+
+.thank_you_header{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin-top: 1%;
+}
+
+.thank_you_header > img{
+    width: 130px;
+    height: 130px;
+}
+
+.thank_you_header > div{
+    display: flex;
+    flex-direction: column;
+    margin: 3%;
+    font-family: 'Open Sans';
+}
+
+.thank_you_header > div > h3{
+    color: #FED22C;
+    font-size: 200%;
+    padding-bottom: 2%;
+}
+
+.thank_you_header > div > label{
+    color: #FED22C;
+    align-self: center;
+    font-size: 160%;
+}
+
+.thank_you_heading{
+    display: flex;
+    flex-direction: column;
+    margin-top: 5%;
+}
+
+.thank_you_heading__main{
+    font-family: 'Signika', sans-serif;
+    color: #FFFFFF;
+    align-self: center;
+    font-size: 500%;
+}
+
+.thank_you_heading__mail{
+    padding-top: 30px;
+    display: flex;
+    color: #E63244;
+    align-self: center;
+    justify-content: space-around;
+    font-family: 'Signika', sans-serif;
+    font-size: 250%;
+}
+
+.thank_you_heading__mail > i{
+    
+}
+
+.thank_you_heading__mail > label{
+    padding-left: 20px;
+}
+
+.confirmation_mail_check{
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+}
+
+.confirmation_mail_check > p{
+    font-family: 'Roboto', sans-serif;
+    font-size: 200%;
+    color: #FFFFFF;
+    align-self: center;
+    font-weight: 400;
+    line-height: 120%;
+}
+
+.confirmation_mail_check > h3{
+    padding-top: 10px;
+    display: flex;
+    color: #E63244;
+    align-self: center;
+    justify-content: space-around;
+    font-family: 'Signika', sans-serif;
+    font-size: 200%;
+}
+
+.share_container_text{
+    padding-top: 5%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+}
+
+.share_container_text > p{
+    align-self: center;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    color: #FFFFFF;
+    font-size: 200%;
+    width: 60%;
+
+}
+
+.share_container_text > p > span{
+
+}
+
+.share_container_buttons{
+    padding-top: 5%;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+    cursor: pointer;
+    padding-bottom: 5%;
+}
+
+.share_container_buttons > li{
+    padding-right: 3%;
+}
+
+.share_container_buttons > li > a i{
+    font-size: 50px;
+    background: #FFFFFF;
+    border-radius: 50%;
+    padding: 15px;
+    box-shadow: 0 5px 4px rgba(0,0,0,.5);
+}
+
+.share_container_buttons > li > a > i{
+    transition: 0.6s;
+    color: #000000
+}
+
+.share_container_buttons > li > a > i:hover{
+    transform: translate(0, -10px);
+    color: #FFFFFF;
+}
+
+.share_container_buttons > li:nth-child(1) > a > i:hover{
+    background-color: #3b5999;
+}
+
+.share_container_buttons > li:nth-child(2) > a > i:hover{
+    background-color:#e4405f ;
+}
+
+.share_container_buttons > li:nth-child(3) > a > i:hover{
+    background-color: #55acee;
+}
+
+footer{
+    background-color: #FDD84D;
+    display: flex;
+    justify-content: space-evenly;
+    padding: 5px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    cursor: pointer;   
+}
+
+
+
+@media(max-width:768px){
+
+    .thank_you_header > img{
+        width: 80px;
+        height: 80px;
+    }
+
+    .thank_you_header > div > h3{
+        font-size: 120%;
+    }
+    
+    .thank_you_header > div > label{
+        font-size: 90%;
+    }
+
+    .thank_you_heading__main{
+        font-size: 200%;
+    }
+
+    .thank_you_heading__mail{
+        font-size: 170%;
+    }
+
+    .confirmation_mail_check > p{
+        font-size: 140%;
+        padding: 2% 5%;
+        text-align: justify;
+    }
+
+    .confirmation_mail_check > h3{
+        padding-top: 10px;
+        font-size: 170%;
+    }
+
+    .share_container_text > p{
+        font-size: 140%;
+        width: 90%;
+    }
+
+    .share_container_buttons{
+        padding-top: 5%;
+        font-size: 12px;
+    }
+
+    .share_container_buttons > li > a i{
+        font-size: 35px;
+    }
+
+    footer{
+        flex-wrap: wrap;
+        font-size: medium;
+        padding-bottom: 8%;
+    }
+
+}
+
+@media(max-width:414px){
+
+    .thank_you_header > img{
+        width: 80px;
+        height: 80px;
+    }
+
+    .thank_you_header > div > h3{
+        font-size: 120%;
+    }
+    
+    .thank_you_header > div > label{
+        font-size: 90%;
+    }
+
+    .thank_you_heading__main{
+        font-size: 200%;
+    }
+
+    .thank_you_heading__mail{
+        font-size: 170%;
+    }
+
+    .confirmation_mail_check > p{
+        font-size: 140%;
+        padding: 2% 5%;
+        text-align: justify;
+    }
+
+    .confirmation_mail_check > h3{
+        padding-top: 10px;
+        font-size: 170%;
+    }
+
+    .share_container_text > p{
+        font-size: 140%;
+        width: 90%;
+    }
+
+    .share_container_buttons{
+        padding-top: 5%;
+        font-size: 12px;
+    }
+
+    .share_container_buttons > li > a i{
+        font-size: 35px;
+    }
+
+    footer{
+        flex-wrap: wrap;
+        font-size: medium;
+        padding-bottom: 8%;
+    }
+
+}
+
+@media(max-width:375px){
+    /* *{
+        margin: 1000px;
+        padding: 1000px;
+        background-color: chocolate;
+    } */
+
+    .thank_you_header > img{
+        width: 80px;
+        height: 80px;
+    }
+
+    .thank_you_header > div > h3{
+        font-size: 120%;
+    }
+    
+    .thank_you_header > div > label{
+        font-size: 90%;
+    }
+
+    .thank_you_heading__main{
+        font-size: 200%;
+    }
+
+    .thank_you_heading__mail{
+        font-size: 170%;
+    }
+
+    .confirmation_mail_check > p{
+        font-size: 140%;
+        padding: 2% 5%;
+        text-align: justify;
+    }
+
+    .confirmation_mail_check > h3{
+        padding-top: 10px;
+        font-size: 170%;
+    }
+
+    .share_container_text > p{
+        font-size: 140%;
+        width: 90%;
+    }
+
+    .share_container_buttons{
+        padding-top: 5%;
+        font-size: 12px;
+    }
+
+    .share_container_buttons > li > a i{
+        font-size: 35px;
+    }
+
+    footer{
+        flex-wrap: wrap;
+        font-size: small;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

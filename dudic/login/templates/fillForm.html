@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DUDIC Course Form</title>
+    <link rel="stylesheet" href="{% static 'css/applyForm.css' %}">
+<!--  -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
+<!--  -->
+
+
+</head>
+<body>
+    <header>
+        <nav class="form_header">
+            <img class="main_logo" src='{% static "IMG/logo.svg" %}' alt="">
+            <ul class="nav_links">
+                <li>Your Application</li>
+                <li><button>May - June</button></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <form method=POST action="." class="apply-form"> {% csrf_token %}
+        <p>
+            <label for="name">
+                <span>Name: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="name" name="name">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.name.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->    
+
+        </p>
+
+        <p>
+            <label for="education">
+                <span>Education: </span>
+                <!-- <strong><abbr title="required">*</abbr></strong> -->
+            </label>
+            <input type="text" id="education" name="education">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.education.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->    
+        </p>
+
+        <p>
+            <label for="age">
+                <span>Age: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="age" name="age">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.age.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <p>
+            <label for="address">
+                <span>Address: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="address" name="address">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.address.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <p>
+            <label for="phone">
+                <span>Phone: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="phone" name="mobile_num">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.phone_number.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <p>
+            <label for="email">
+                <span>Email: </span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="email" id="email" name="email">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.email.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <p>
+            <label for="instituteOrStartup">
+                <span>Please Enter your Institute/University/Startup</span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <input type="text" id="instituteOrStartup" name="instituteOrStartup">
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.instituteOrStartup.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <p>
+            <label for="student_details">
+                <span>Describe your self: </span>
+                <span class="help_text"></span>
+                <strong><abbr title="required">*</abbr></strong>
+            </label>
+            <textarea type="text" id="student_details" name="student_details" cols="10" rows="10"></textarea>
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.student_details.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+        </p>
+
+        <section class="courses-list">
+           <div class="heading-course-list"> 
+                <h2>Select courses in here</h2>
+                <em>( please select one, with appropriate date )</em>
+                <strong><abbr title="required">*</abbr></strong>
+            </div>
+
+            <ul class='table_course_list'> 
+                    {% for course in queryset %}
+                    <li class="inside_course_list"> <!-- For Checkbox -->
+                        <label class="checkboxContainer" for="{{ course.name }}">
+                            <input type="radio" id="{{ course.name }}" name=course_name value="{{ course.id }}">
+                            <span class='checkmark'>{{ course.name }} </span>
+                        </label>
+                        <select id="course_date" class="box" name="course_date">
+                            <!-- <option selected>Choose ....</option> -->
+                            {% for item in course.relateds.all %}
+                            <option value="{{ item.id }}">{{ item.start_date }} - {{ item.end_date }}</option>
+                            {% endfor %}
+                        </select>
+                    </li>
+                    {% endfor %}
+            </ul>
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.course_name.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+
+            <!-- validation error block start -->
+            <ul class="errorlist">
+                <li>{{ form.course_date.errors }}</li>
+            </ul>          
+            <!-- end error block validation -->
+
+        </section>
+
+
+
+            <p>
+                <label for="course_reason">
+                    <span>Why do you want to attend this course?</span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <textarea name="reason" id="course_reason" cols="10" rows="10"></textarea>
+                <!-- validation error block start -->
+                <ul class="errorlist">
+                    <li>{{ form.reason.errors }}</li>
+                </ul>          
+                <!-- end error block validation --> 
+            </p>
+
+            <p>
+                <label for="learning">
+                    <span>How did you know about this course?</span>
+                    <strong><abbr title="required">*</abbr></strong>
+                </label>
+                <input type="text" id="learning" name="hear_about">
+                <!-- validation error block start -->
+                <ul class="errorlist">
+                    <li>{{ form.hear_about.errors }}</li>
+                </ul>          
+                <!-- end error block validation --> 
+            </p>
+
+        <div class="submit_button">
+            <!-- <button type="submit"><a href="#"></a>Submit</a></button> -->
+            <button type="submit">Submit</button>
+        </div>
+    </form>
+
+    <footer>
+        <ul>
+            <li><img src="{% static 'IMG/logo.svg' %}" alt="dudic-logo"></li>
+            <li><a class='footer__a' href="#">Privacy Policy</a></li>
+            <li><a class='footer__a' href="#">Terms of Usage</a></li>
+        </ul>
+
+    </footer>    
+
+</body>
+</html>
