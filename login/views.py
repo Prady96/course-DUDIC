@@ -87,7 +87,11 @@ def apply_page_new(request):
             course_name = form.cleaned_data['course_name']
             course_date = form.cleaned_data['course_date']
         else:
-            return render(request, 'fillForm.html', context={'form': form})
+            context={
+                'queryset' : qs,
+                'form': form
+            }
+            return render(request, 'fillForm.html', context)
             print(form.errors)
         ApplicationModel.objects.create(**form.cleaned_data)
         start_date  = course_date.start_date
