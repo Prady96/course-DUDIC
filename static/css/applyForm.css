@@ -254,7 +254,6 @@ label {
 }
 
 
-
 .submit_button{
     display: flex;
     justify-content: center;
@@ -371,7 +370,7 @@ footer > ul > li > img{
         padding: 5% 0;
         width: 140%;
     }
-
+    
     .submit_button{
         justify-content: center;
     }
@@ -502,6 +501,10 @@ footer > ul > li > img{
     .inside_course_list > label{
         padding: 5% 0;
         width: 140%;
+    }
+
+    .alert_message{
+        width: 200%;
     }
 
     .submit_button{

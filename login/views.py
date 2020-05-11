@@ -8,6 +8,7 @@ from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
 
+####################### TEST PAGES #######################
 
 def apply_page(request):
     return render(request, 'fillForm.html')
@@ -20,6 +21,8 @@ def error_page(request):
 
 def thank_you_page(request):
     return render(request, 'thank_you.html')
+
+####################### EMAIL #############################
 
 def success(request ,name, email, course_name, start_date, end_date, course_id):
     print(name, email, course_name, start_date, end_date )
@@ -64,11 +67,79 @@ def success(request ,name, email, course_name, start_date, end_date, course_id):
     return render(request, 'thank_you.html', context)
 
 
+####################### TEMPLATE TAGS #######################
+
+from django import template
+register = template.Library()
+
+# @register.filter
+# def upper(value1, value2):
+#     """Testing Converts a string into all uppercase"""
+#     print(value1)
+#     print(value2)
+#     return value.upper()
+
+# @register.filter
+# def people(course_id, course_date):
+#     dates = DateModel.objects.filter(course_id = course_id)
+#     import pdb;pdb.set_trace()
+#     date = dates.filter(start_date=start_date) & dates.filter(end_date=end_date)
+#     date
+    
+#     date = dates.objects.filter(course_date=course_date)
+#     date.relateds.all()
+#     people_registered = date.relateds.count()
+#     return people_registered
+
+
+# @register.filter
+# def number_of_people_registered(course_id, course_date):
+#     dates = DateModel.objects.filter(course_id = course_id)
+#     import pdb;pdb.set_trace()
+#     date = dates.objects.filter(course_date=course_date)
+#     date.relateds.all()
+#     people_registered = date.relateds.count()
+#     return people_registered
+
+####################### CUSTOM FUNCTIONS #######################
+
+def count_number_registerations(course_id):
+    """Count number of registeration for each course"""
+    qs = DateModel.objects.filter(course_id=course_id)
+    for i in range(len(qs)):
+        date = DateModel.objects.filter(course_id=course_id)[i]
+        print('start_date is', date.start_date)
+        values = DateModel.objects.filter(course_id=course_id)[i].relateds.count()
+        print('number of registerations done', values)
+        ans = DateModel.objects.filter(course_id=course_id).filter(start_date=date.start_date).update(registeration=values)
+        print('Values are update Sucessfully', ans)
+
+
+def update_date_registered_user(course_id, course_date_id):
+    """Shifting Candidates Dates"""
+    qs = ApplicationModel.objects.filter(course_name_id=course_id)
+    number = ApplicationModel.objects.filter(course_name_id=course_id).count()
+    print('number of People Registered for this course', number)
+    ans = ApplicationModel.objects.filter(course_name_id=course_id).update(course_date_id=course_date_id)
+    print('Success', ans)
+    count_number_registerations(course_id)
+    print('Updated on Main Table')
+
+
+
+def update_count_user_registeration(course_id, course_date):
+    """After Application Update Registeration"""
+    alrdy_regstd = 0
+    print('before',alrdy_regstd)
+    alrdy_regstd = DateModel.objects.filter(course_id=course_id).get(start_date=course_date.start_date).relateds.count()
+    print('after',alrdy_regstd)
+    date = DateModel.objects.filter(course_id=course_id).filter(start_date=course_date.start_date)
+    date.update(registeration = alrdy_regstd)
+
+####################### MAIN VIEWS ###########################
+
 def apply_page_new(request):
     qs = CourseModel.objects.all()
-    dateModel = DateModel.objects.all()
-    ap = ApplicationModel.objects.all()
-    date = DateModel.objects.filter()
     
     if request.method == 'POST':
 
@@ -92,8 +163,6 @@ def apply_page_new(request):
             context={
                 'queryset' : qs,
                 'form': form,
-                'applications' : ap,
-                'dates' : dateModel,
             }
             return render(request, 'fillForm.html', context)
             print(form.errors)
@@ -101,6 +170,7 @@ def apply_page_new(request):
         start_date  = course_date.start_date
         end_date    = course_date.end_date
         course_id   = course_name.id
+        update_count_user_registeration(course_id, course_date)
         data = success(request, name, email, course_name, start_date, end_date, course_id)
         print('reached')
         context = {
@@ -111,13 +181,10 @@ def apply_page_new(request):
     context = {
         'queryset' : qs,
         'form': form,
-        'applications' : ap,
-        'dates' : dateModel,
     }
     return render(request, 'fillForm.html', context)
 
-
-# def apply_page_new(request):
+###############################################################
     
 
 

@@ -32,6 +32,7 @@ class DateModel(models.Model):
         blank = False,
         related_name ='relateds' 
     )
+    registeration = models.IntegerField()
 
     def __str__(self):
         return "{} - {}".format(self.start_date, self.end_date)
