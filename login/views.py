@@ -61,14 +61,15 @@ def success(request ,name, email, course_name, start_date, end_date, course_id):
     start_date = ''
     end_date = ''
 
-
-
-
     return render(request, 'thank_you.html', context)
 
 
 def apply_page_new(request):
     qs = CourseModel.objects.all()
+    dateModel = DateModel.objects.all()
+    ap = ApplicationModel.objects.all()
+    date = DateModel.objects.filter()
+    
     if request.method == 'POST':
 
         form = ApplyForm(request.POST or None)    
@@ -86,8 +87,15 @@ def apply_page_new(request):
             hear_about  = form.cleaned_data['hear_about']
             course_name = form.cleaned_data['course_name']
             course_date = form.cleaned_data['course_date']
+            # import pdb; pdb.set_trace()
         else:
-            return render(request, 'fillForm.html', context={'form': form})
+            context={
+                'queryset' : qs,
+                'form': form,
+                'applications' : ap,
+                'dates' : dateModel,
+            }
+            return render(request, 'fillForm.html', context)
             print(form.errors)
         ApplicationModel.objects.create(**form.cleaned_data)
         start_date  = course_date.start_date
@@ -102,7 +110,9 @@ def apply_page_new(request):
     form = ApplyForm()
     context = {
         'queryset' : qs,
-        'form': form
+        'form': form,
+        'applications' : ap,
+        'dates' : dateModel,
     }
     return render(request, 'fillForm.html', context)
 

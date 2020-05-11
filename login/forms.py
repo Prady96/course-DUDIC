@@ -42,6 +42,36 @@ class ApplyForm(ModelForm):
             raise forms.ValidationError("This mobile_num has already been used")
         return mobile_num
 
+    def clean_course_date(self):
+        # import pdb;pdb.set_trace()
+        course_name = self.cleaned_data.get('course_name')
+        course_date = self.cleaned_data.get('course_date')
+        course_name_1 = course_name
+        course_date_1 = course_date
+        qs = CourseModel.objects.filter(name=course_name)[0]
+        qs.relateds.all()
+        q2 = qs.relateds.filter(start_date=course_date_1.start_date)
+        q1 = qs.relateds.filter(end_date=course_date_1.end_date)
+        if len(q1) == 0 or len(q2) == 0:
+            raise forms.ValidationError('Please select one course_date for course_name & disable others')
+        if set(list(q1)) != set(list(q2)):
+              raise forms.ValidationError('Please select one course_date for course_name & disable others')
+        else:
+              return course_date
+    # 
+
+
+    # if q1.exists() and str(q1[0]) == course_date_1.end_date:
+    #           if q2.exists() and str(q2[0]) == course_date_1.start_date:
+    #               return
+    #       else:
+    #           raise forms.ValidationError("Please Select Date Appropriately")
+    #     if not qs.relateds.filter(start_date=start_date) qs.relateds.filter(end_date=end_date):
+    #           raise forms.ValidationError('Please select course_date for course_name & disable others')
+    #       
+
+
+
 
 
 

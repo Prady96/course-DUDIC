@@ -71,7 +71,8 @@ class ApplicationModel(models.Model):
         DateModel, 
         on_delete=models.SET_NULL, 
         null = True, 
-        blank = False
+        blank = False,
+        related_name = 'relateds'
     )
 
     date  = models.DateField(auto_now=True)

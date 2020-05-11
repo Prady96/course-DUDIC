@@ -9,7 +9,17 @@
 <!--  -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
 <!--  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(function() {
+        $('[name="course_name"]').on('change', function() { // whenever user changes his selection fire an event
 
+        $select = $('[name="course_date"]');  // select element
+        $select.attr('disabled', true);  // make all select disabled(if previously one of them wasn't)
+        $(this).parent().siblings('[name="course_date"]').attr('disabled', false); // make the closest one active -- here I've first chose parent({label}) and then its sibling({[name="course_date"]})
+    });
+});
+    </script>
 
 </head>
 <body>
@@ -153,8 +163,13 @@
                             <input type="radio" id="{{ course.name }}" name=course_name value="{{ course.id }}">
                             <span class='checkmark'>{{ course.name }} </span>
                         </label>
+                        <p>
+
+                        </p>
+
                         <select id="course_date" class="box" name="course_date">
                             <!-- <option selected>Choose ....</option> -->
+                            <option selected=selected disabled>PLease select objects</option>
                             {% for item in course.relateds.all %}
                             <option value="{{ item.id }}">{{ item.start_date }} - {{ item.end_date }}</option>
                             {% endfor %}
