@@ -57,7 +57,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SECRET_KEY = 'yn!bk5(u80crtcnq@*hf*!**0-vr5d^#54!f-=9u#*in$4kr$*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*',]
 
@@ -74,7 +74,7 @@ INSTALLED_APPS = [
     'login',
     'course',
     'phonenumber_field',
-    'linkcheck',
+    # 'linkcheck',
 ]
 
 MIDDLEWARE = [

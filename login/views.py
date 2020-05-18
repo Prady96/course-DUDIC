@@ -188,6 +188,7 @@ https://docs.djangoproject.com/en/3.0/topics/auth/default/
 
 import random
 import uuid
+import time
 
 def password_generator(age):
     chrs = '0123456789@$#_'
@@ -203,13 +204,16 @@ def username_generator(firstname, age):
 
 # add course_date for finding exact users
 # ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date='2020-05-19').count()
+# ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date='2020-05-19').filter(email_sent=False)
 check = []
 from django.contrib.auth.models import User
 def create_user(courseName, courseStartDate):
     # import pdb;pdb.set_trace()
-    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False).count()
     print(total)
-    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False)
     # qs = ApplicationModel.objects.filter(course_name__name=courseName)
     for user in qs:
         name = user.name
@@ -237,6 +241,8 @@ def create_user(courseName, courseStartDate):
                 applicant.update(email_sent=True)
                 UserModel.objects.create(username=username, email=email, password=password, course_name=course_name)
                 print('User Created')
+                print('Will Wait for 500 seconds')
+                time.sleep(100)
             print('reached')
         else:
             print('user not created')
