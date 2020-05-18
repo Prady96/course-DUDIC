@@ -1,0 +1,220 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
+    
+    <link rel="stylesheet" href='{% static "css/main_page.css" %}'>
+    <link rel="stylesheet" href='{% static "css/course_page.css" %}'>
+    
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+      
+</head>
+<body class="bodyBackgroundColor">
+    <nav class="navbar navbar-light bglightcolor d-flex flex-row">
+    <div class="container">   
+    <a class="navbar-brand ml-2" href="">
+           <img src="{% static 'IMG/course/logo.svg' %}" width='200' height="80" class="d-inline-block align-top" alt="" loading="lazy">
+       </a>
+        <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle outercolor" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          {{ request.user }}
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item datecolor" href="#">{{queryset.date.start_date}} - {{queryset.date.end_date}}</a>
+          <a class="dropdown-item" href="{% url 'home_page' %}">Logout</a>
+        </div>
+        
+      </li>
+      </div>
+    </nav>
+
+<div class='container'>
+<div class='row'>
+   <div class='col'>
+        <div class="d-flex justify-content-end ml-auto mt-3 mb-3 px-1">
+        <a href="{{ queryset.slack_link }}" target='_blank'><button class="slackButton px-3 py-2">
+        <img src="{% static 'IMG/course/slack_main.png' %}" alt="" width="60px" height="35">
+        <img src="{% static 'IMG/course/slack_logo.png' %}" alt="" width="30px" height="30px">
+        </button></a>   
+    </div>
+   </div>
+</div>
+</div>
+
+
+<div class="container">
+   <div class="shadow p-3 mb-5 bg-white rounded">
+    <div class="row mb-5">
+        <div class="col">
+          <div class=' d-flex justify-content-center course__heading order-1'>
+            <h1 class="course__title">{{ queryset.course_name.name }}</h1> 
+          </div>
+        </div>
+    </div>
+    
+    {% for item in specific %}
+    <div class="row mt-5">
+      <div class="col-sm-8 col-md-8 col-lg-8 mr-5 lecture ml-3 {% if not item.available %} disabledDiv {% endif %}">
+         <div class="row">
+             <div class="col-sm-8 col-md-8 col-lg-10">
+                  <p class="lecture__title">{{ item.title }}</p>
+                  <p class="lecture__desc">{{ item.description }}</p>
+             </div>
+             <div class="col-sm-2 lecture__date">
+                 <p>{{ item.date }}</p>
+             </div>
+         </div>
+
+      </div>
+      <div class="col-sm-3 col-md-2 col-lg-2 mr-auto">
+          <button class="{% if item.available %}zoomButton px-1 py-1 w-100{% else %} disabled_zoom px-1 py-1 w-100 {% endif %}">
+            <a class='{% if item.available %} zoomButton {% else %} disabled_zoom {% endif %}' href="{{ item.zoom_link }}">
+            Zoom Call Scheduled at {{ item.meeting_timing }} IST
+          <img src="img/zoom_logo.png" alt="" width="20px" height="20px" class="m-1"></a>
+        </button>
+      </div>
+   </div>
+   <div class="row mt-3">
+      <div class="col w-100">
+      <a href="{{ item.download_resources.url }}" target="_blank"><button class="{% if item.available %} yellowButton {% else %} disabled_buttton {% endif %} px-3 py-1 mr-2">Download Resources</button></a>
+     <button class="{% if item.available %} yellowButton {% else %} disabled_buttton {% endif %}px-3 py-1 ml-2"> <a href="{{ item.upload_resources }}">Upload documents</a></button>
+      </div>
+   </div>
+   {% endfor %}
+   
+    
+    </div>
+</div> <!-- end_container -->
+
+
+
+
+
+
+         
+          
+           
+            
+             
+              
+               
+                
+                 
+                  
+                   
+                    
+                     
+                      
+                       
+                         
+    
+     
+      
+       
+        
+         
+          
+           
+            
+             
+              
+               
+                
+                 
+                  
+                   
+                    
+                     
+                      
+                       
+                         
+  
+     
+      
+       
+        
+         
+          
+           
+            
+             
+              
+               
+                
+                 
+                  
+                   
+                    
+                     
+                      
+                       
+                         
+  
+     
+      
+       
+        
+         
+          
+           
+            
+             
+              
+               
+                
+                 
+                  
+                   
+                    
+                     
+                      
+                       
+                         
+  
+     
+      
+       
+        
+         
+          
+           
+            
+             
+              
+               
+                
+                 
+                  
+                   
+                    
+                     
+                      
+                       
+                         
+  
+
+    <footer class="footer">
+      <div class="container-fluid bglightcolor p-2">
+       <img class="img-fluid float-left" src="img/brain_image.svg" alt="" width="30px" height="30px">
+       <a href='#' class="footer-left pl-3 footer__copyright">Privacy Policy</a>
+       <a href='#' class="float-right footer__copyright">© 2020 Copyright: dudic.io</a>
+      </div>
+    </footer>
+    
+    </body>
+</html>

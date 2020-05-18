@@ -37,6 +37,15 @@ STATICFILES_DIRS = (
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
+# MEDIA_URL = '/images/'
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
+
+
+
+
+
+
 #####################################################################
 
 
@@ -48,7 +57,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 SECRET_KEY = 'yn!bk5(u80crtcnq@*hf*!**0-vr5d^#54!f-=9u#*in$4kr$*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*',]
 
@@ -65,6 +74,7 @@ INSTALLED_APPS = [
     'login',
     'course',
     'phonenumber_field',
+    'linkcheck',
 ]
 
 MIDDLEWARE = [
@@ -146,11 +156,11 @@ USE_TZ = True
 ################################################
 
 EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'ask@dudic.io'
-EMAIL_HOST_PASSWORD = 'Dic#2018$'
+EMAIL_HOST_USER = 'course@dudic.io'
+EMAIL_HOST_PASSWORD = 'harebol@123'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Team DIC <ask@dudic.io>'
+DEFAULT_FROM_EMAIL = 'Team DIC <course@dudic.io>'
 
 """ Sending Mail Procedure
 from django.conf import settings

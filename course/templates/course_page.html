@@ -1,0 +1,104 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   
+<!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+
+<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>  
+    
+    <!-- <link rel="stylesheet" href="css/main_page_style.css"> -->
+    <link rel="stylesheet" href="{% static 'css/main_page.css' %}">
+
+
+    <meta charset="UTF-8">
+    <title>Main Page</title>
+      
+</head>
+<body class="bodyBackgroundColor">
+    <nav class="navbar navbar-light bglightcolor d-flex flex-row">
+    <div class="container">   
+    <a class="navbar-brand ml-2" href="">
+           <img src="{% static 'IMG/course/logo.svg' %}" width='200' height="80" class="d-inline-block align-top" alt="" loading="lazy">
+       </a>
+        <li class="nav-item dropdown">
+          {% if request.user.is_authenticated %}
+            <a class="nav-link dropdown-toggle outercolor" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              {{ request.user }}
+            </a>
+          {% else %}
+            <a class="nav-link dropdown-toggle outercolor" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              No User
+            </a>
+          {% endif %}
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <!-- <a class="dropdown-item datecolor" href="#">April 25-27</a> -->
+          <a class="dropdown-item" href="{% url 'home_page' %}">Logout</a>
+          <!-- <a class="dropdown-item" href="{% url 'login:logout' %}">Logout</a> -->
+        </div>
+        
+      </li>
+      </div>
+    </nav>
+    
+    
+<div class="container" id="page-container">
+  {% for item in queryset %}
+  <div class="{% if item.available %} row {% else %} disabledDiv {% endif %}" {%if not item.available %} disabled="true" {%endif%}>
+    <div class='col-sm-12 col-md-10 col-lg-8 mr-auto mt-3'>
+      <div class="card d-flex flex-row shadow p-3 mb-2 bg-white rounded">
+      <div class="card-body">
+          <h5 class="card__title">{{ item.course_name }}</h5>
+          <p class="card-text card__code"> {{ item.course_name.id }} </p>
+          <p class="card-text card__code"> {{ item.date }} </p>
+          <div class="mt-5 d-flex flex-row">
+          <p class="card__instructor mt-1">Instructor</p>
+          <p class="ml-2 instructor__name">{{ item.instructor.first_name }} {{ item.instructor.last_name}}</p>
+          </div>
+      </div>
+      <div>
+          <img class="img-fluid float-right p-3" src="{{ item.course_image.url }}" alt="" width="120px" height="120px">
+      </div>
+      <div>
+        {% if item.course_status == 'P' %}
+        <a href=""><button type="button" class="btn btn-outline-info">{{item.get_course_status_display}}</button></a>
+        {% elif item.course_status == 'C' %}
+        <a href="{% url 'course:lecture_page' course_name=item.course_name %}"><button type="button" class="btn btn-outline-warning">{{item.get_course_status_display}}</button></a>
+        {% elif item.course_status == 'R' %}
+        <a href="{% url 'course:lecture_page' course_name=item.course_name %}"><button value="{{ item.course_name }}" type="button" class="btn btn-outline-success">{{item.get_course_status_display}}</button></a>
+        {% endif %}
+        </div>
+    </div>
+  </div>
+</div>
+{% endfor %}
+</div>
+
+
+
+        
+</body>
+
+<footer class="footer">
+  <div class="container-fluid bglightcolor">
+   <img class="img-fluid float-left" src="img/brain_image.svg" alt="" width="30px" height="30px">
+   <a href='#' class="footer-left pl-3 footer__copyright">Privacy Policy</a>
+   <a href='#' class="float-right footer__copyright">© 2020 Copyright: dudic.io</a>
+  </div>
+</footer>
+
+</html>
+
+
+

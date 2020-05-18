@@ -24,6 +24,49 @@ def thank_you_page(request):
 
 ####################### EMAIL #############################
 
+def send_username_password_email(username, password, 
+                                email, name, course_name, 
+                                start_date, end_date, course_id):
+    print(username, password, email, name, course_name, start_date, end_date, course_id)
+
+    if course_id == 'DUDIC01B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course6.jpg'
+    if course_id == 'DUDIC02B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course5.jpg'
+    if course_id == 'DUDIC03B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course2-1.jpg'
+    if course_id == 'DUDIC04B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course.jpg'
+    if course_id == 'DUDIC05B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course3.jpg'
+    if course_id == 'CISE01B2':
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course-7.jpg'
+
+    template = render_to_string('send_username_password_email_template.html', 
+                                {'name'       : name,
+                                 'course_name': course_name,
+                                 'course_id'  : course_id,
+                                 'start_date' : start_date,
+                                 'end_date'   : end_date, 
+                                 'course_poster' : course_poster,
+                                 'username' : username,
+                                 'password' : password,})
+    
+    email = EmailMessage(
+        'Cordinator DIC',
+        template,
+        settings.EMAIL_HOST_USER,
+        [email,]
+    )
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
+
 def success(request ,name, email, course_name, start_date, end_date, course_id):
     print(name, email, course_name, start_date, end_date )
 
@@ -136,6 +179,76 @@ def update_count_user_registeration(course_id, course_date):
     date = DateModel.objects.filter(course_id=course_id).filter(start_date=course_date.start_date)
     date.update(registeration = alrdy_regstd)
 
+
+### CUSTOM FUNCTIONS > GENERATE USER & PASSWORD FROM APPLICANTS
+"""Refer to User fields docs
+https://docs.djangoproject.com/en/3.0/topics/auth/default/
+"""
+
+
+import random
+import uuid
+
+def password_generator(age):
+    chrs = '0123456789@$#_'
+    age = str(age)
+    password = age.join(random.sample(chrs, k=3))
+    return password
+
+def username_generator(firstname, age):
+    username = firstname + str(age)
+    random_number = uuid.uuid4().hex[:2]
+    username = username + str(random_number)
+    return username
+
+# add course_date for finding exact users
+# ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date='2020-05-19').count()
+check = []
+from django.contrib.auth.models import User
+def create_user(courseName, courseStartDate):
+    # import pdb;pdb.set_trace()
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    print(total)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName)
+    for user in qs:
+        name = user.name
+        firstname = name.split()[0]
+        age = user.age
+        username = username_generator(firstname, age)
+        print(username)
+        password = password_generator(age)
+        print(password)
+        email = user.email
+        course_name = user.course_name
+        start_date = user.course_date.start_date
+        end_date = user.course_date.end_date
+        course_id = user.course_name.id
+        user_save_qs = User.objects.create_user(username, email, password)
+        if user_save_qs:
+            user.firstname = firstname
+            print("user created successful {}".format(firstname))
+            user.save()
+            email_sent = send_username_password_email(username, password, 
+                                email, name, course_name, 
+                                start_date, end_date, course_id)
+            if email_sent:
+                applicant = ApplicationModel.objects.filter(course_name__name=courseName).filter(name=user)
+                applicant.update(email_sent=True)
+                UserModel.objects.create(username=username, email=email, password=password, course_name=course_name)
+                print('User Created')
+            print('reached')
+        else:
+            print('user not created')
+            check.append(firstname)
+
+# applicant = ApplicationModel.objects.filter(course_name__name=courseName).filter(name=user)
+# applicant.delete()
+
+# UserModel.objects.create(username=username, email=email, password=password, course_name=course_name, date=date)
+# print('User Created')
+
+
 ####################### MAIN VIEWS ###########################
 
 def apply_page_new(request):
@@ -183,6 +296,81 @@ def apply_page_new(request):
         'form': form,
     }
     return render(request, 'fillForm.html', context)
+
+####################### LOGIN ###########################
+from django.contrib.auth import authenticate, login, logout
+from django.shortcuts import redirect
+from django.contrib import messages
+
+def login_page(request):
+    """login page for user login"""
+    
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('pass')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('login:course_page')
+        else:
+            messages.info(request, 'Username or password is incorrect')
+
+    context = {}
+    return render(request, 'login_page.html', context)
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home_page')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ###############################################################
     

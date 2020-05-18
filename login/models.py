@@ -53,14 +53,6 @@ class ApplicationModel(models.Model):
     email              = models.EmailField()
     reason             = models.CharField(max_length=500)
     instituteOrStartup = models.CharField(max_length=200, null=True)
-    # ENTERPRENEUR = 'ER'
-    # UNDERGRADUATE = 'UG'
-    # POSTGRADUATE = 'PG'
-    # STUDENT_DETAILS_CHOICES = [
-    #                             (ENTERPRENEUR, 'Entrepreneur'),
-    #                             (UNDERGRADUATE, 'Undergraduate'),
-    #                             (POSTGRADUATE, 'Postgraduate'),
-    #                         ]
     student_details    = models.CharField(max_length=100)
     hear_about         = models.CharField(max_length=100)
     course_name        = models.ForeignKey(CourseModel, 
@@ -78,6 +70,8 @@ class ApplicationModel(models.Model):
 
     date  = models.DateField(auto_now=True)
 
+    email_sent = models.BooleanField(default = False)
+
     def __str__(self):
         return self.name
 
@@ -90,29 +84,20 @@ from django.conf import settings
 
 User = settings.AUTH_USER_MODEL
 
+
 class UserModel(models.Model):
     """ Selected User After Application """
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.SET_NULL, 
-        null = True, 
-        blank = False
-    )
-    name = models.CharField(max_length=50)
-    education   = models.CharField(max_length=50)
-    age         = models.IntegerField()
-    address     = models.CharField(max_length=200)
-    mobile_num  = models.IntegerField()
-    email       = models.EmailField()
-    reason      = models.CharField(max_length=500)
-    hear_about  = models.CharField(max_length=100)
-    
+    username = models.CharField(max_length=100, null=True)
+    email = models.EmailField(null=True)
+    password = models.CharField(max_length=100, null=True)
+    course_name = models.CharField(max_length=50, null=True)
+
     def __str__(self):
-        pass
+        return self.username
 
     class Meta:
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = 'Selected User'
+        verbose_name_plural = 'Selected Users'
 
 
 

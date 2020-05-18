@@ -9,7 +9,7 @@ admin.site.index_title = "Welcome to DUDIC Courses Portal"
 # admin.site.register(CourseModel)
 # admin.site.register(DateModel)
 # admin.site.register(ApplicationModel)
-admin.site.register(UserModel)
+# admin.site.register(UserModel)
 
 
 @admin.register(CourseModel)
@@ -21,7 +21,7 @@ class CourseAdminModel(admin.ModelAdmin):
 
 @admin.register(ApplicationModel)
 class ApplicationAdminModel(admin.ModelAdmin):
-    list_display = ['name','education','age','email','reason','hear_about','course_name','course_date','date']
+    list_display = ['name','education','age','email','reason','hear_about','course_name','course_date','date','email_sent']
     list_filter = ['course_name', 'course_date']
     ordering = ['name','date']
     search_fields = ['name',]
@@ -35,4 +35,10 @@ class DateCourseModel(admin.ModelAdmin):
     list_filter = ['start_date', 'course_id']
     ordering = ['start_date','course_id']
     save_as = True
+
+@admin.register(UserModel)
+class SelectedUserModel(admin.ModelAdmin):
+    list_display = ['id', 'username', 'email', 'password', 'course_name']
+    search_fields = ['username', 'email']
+    ordering = ['username', 'email','course_name']
 

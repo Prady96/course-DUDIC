@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700;900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin:wght@300;500;600&display=swap');
+
+
+.zoomButton{
+  font-family: 'Libre Franklin', sans-serif;
+  color: white;
+  background-color: #066FBF;
+  border-color: #41ACFD;
+/*  font-weight: bold;*/
+  letter-spacing: 0.05em;
+  border-radius: 10px;
+  font-weight: 600; 
+}
+
+.zoomButton:hover,
+.zoomButton:active,
+.zoomButton:focus,
+.zoomButton.active {
+  /* let's darken #004E64 a bit for hover effect */
+  background: #41ACFD;
+  color: #ffffff;
+  border-color: #41ACFD;
+}
+
+
+.yellowButton{
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 600;
+    background-color: #FDCE2F;
+    border-radius: 30px;
+    letter-spacing: 0.05em;  
+}
+
+.yellowButton:hover,
+.yellowButton:active,
+.yellowButton:focus,
+.yellowButton.active{
+  background: #FFC502;
+/*  color: #ffffff;*/
+/*  border-color: #41ACFD;*/
+}
+
+.slackButton{
+    font-family: 'Libre Franklin', sans-serif;
+    border-radius: 15px;
+    border-color: none;
+}
+
+
+.slackButton:hover,
+.slackButton:active,
+.slackButton:focus,
+.slackButton.active{
+  background: #EDF1F5;
+/*  color: #ffffff;*/
+/*  border-color: #41ACFD;*/
+}
+
+.course__title{
+    font-family: 'Merriweather', serif;
+    font-weight: 700;
+    font-size: 45px;
+}
+
+.lecture__title{
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+    font-size: 30px;   
+}
+
+.lecture__desc{
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+    color: #627691;
+}
+
+.lecture__date{
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 300;
+    color: #11263F;
+    
+}
+
+.disabled_zoom{
+    font-family: 'Libre Franklin', sans-serif;
+    color: white;
+    pointer-events: none;
+    opacity: 0.8;
+    background-color: #CACBCF;
+    border-color: #41ACFD;
+    letter-spacing: 0.05em;
+    border-radius: 10px;
+    font-weight: 600; 
+}
+
+.disabled_buttton{
+    pointer-events: none;
+    opacity: 0.4;
+    font-family: 'Libre Franklin', sans-serif;
+    font-weight: 600;
+    background-color: #E5E8ED;
+    border-radius: 30px;
+    letter-spacing: 0.05em;  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
