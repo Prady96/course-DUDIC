@@ -14,7 +14,7 @@ class LectureForm(ModelForm):
         model = lecture
         fields = ['course_name','title','description',
                     'zoom_link','download_resources',
-                    'upload_resources','available']
+                    'available']
 
 
 

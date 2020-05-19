@@ -66,8 +66,8 @@ class lecture(models.Model):
     description = models.TextField(default = ' ', blank=True)
     zoom_link = models.CharField(max_length = 200, null = True, blank=True)
     meeting_timing = models.TimeField(null=True, blank=True)
-    download_resources = models.FileField(upload_to='static/Instructor/',null=True, blank=True)
-    upload_resources = models.FileField(null = True, blank=True)
+    download_resources = models.CharField(max_length=500, null=True, blank=True)
+    # upload_resources = models.FileField(null = True, blank=True)
     available = models.BooleanField(default = True, blank=True)
     date = models.DateField(null=True, blank=True)
 
