@@ -151,16 +151,16 @@ USE_L10N = True
 
 USE_TZ = True
 
-################################################
-#    Sending Mails from ( ask@dudic.io )
-################################################
+########################################################
+#    Sending Mails from ( course@dudic.io ) ZOHO Mail
+########################################################
 
-EMAIL_HOST = 'smtp.zoho.com'
-EMAIL_HOST_USER = 'course@dudic.io'
-EMAIL_HOST_PASSWORD = 'harebol@123'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = 'Team DIC <course@dudic.io>'
+# EMAIL_HOST = 'smtp.zoho.com'
+# EMAIL_HOST_USER = 'course@dudic.io'
+# EMAIL_HOST_PASSWORD = 'harebol@123'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# DEFAULT_FROM_EMAIL = 'Team DIC <course@dudic.io>'
 
 """ Sending Mail Procedure
 from django.conf import settings
@@ -181,7 +181,17 @@ PHONENUMBER_DB_FORMAT = "NATIONAL"
 PHONENUMBER_DEFAULT_REGION = "IN"
 
 
+#######################################################
+#    Sending Mails from ( course@dudic.io ) Send Grid
+#######################################################
 
+SENDGRID_API_KEY = os.getenv('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')
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+EMAIL_HOST_USER = 'apikey' 
+EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
 
 
 

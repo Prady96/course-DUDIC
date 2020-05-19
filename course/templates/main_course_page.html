@@ -20,6 +20,8 @@
     <link rel="stylesheet" href='{% static "css/main_page.css" %}'>
     <link rel="stylesheet" href='{% static "css/course_page.css" %}'>
     
+    <script src="https://use.fontawesome.com/78b6eab973.js"></script>
+
     <meta charset="UTF-8">
     <title>Main Page</title>
       
@@ -82,11 +84,14 @@
 
       </div>
       <div class="col-sm-3 col-md-2 col-lg-2 mr-auto">
-          <button class="{% if item.available %}zoomButton px-1 py-1 w-100{% else %} disabled_zoom px-1 py-1 w-100 {% endif %}">
-            <a class='{% if item.available %} zoomButton {% else %} disabled_zoom {% endif %}' href="{{ item.zoom_link }}">
-            Zoom Call Scheduled at {{ item.meeting_timing }} IST
-          <img src="img/zoom_logo.png" alt="" width="20px" height="20px" class="m-1"></a>
-        </button>
+        <a class='{% if item.available %} zoomButton {% else %} disabled_zoom {% endif %}' href="{{ item.zoom_link }}"><button class="{% if item.available %}zoomButton px-1 py-1 w-100{% else %} disabled_zoom px-1 py-1 w-100 {% endif %}">
+          <i class="fa fa-video-camera pl-2" aria-hidden="true"></i>  
+          Zoom Call Scheduled at {{ item.meeting_timing }} IST
+          <img src="img/zoom_logo.png" alt="" width="20px" height="20px" class="m-1">
+        </button></a>
+
+        <button type="button" class="btn btn-outline-info zoomButton"></i> Behance</button>
+
       </div>
    </div>
    <div class="row mt-3">
