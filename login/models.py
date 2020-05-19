@@ -72,6 +72,8 @@ class ApplicationModel(models.Model):
 
     email_sent = models.BooleanField(default = False)
 
+    timing_mail_sent = models.BooleanField(default = False)
+
     def __str__(self):
         return self.name
 
