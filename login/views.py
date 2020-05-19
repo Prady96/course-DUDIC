@@ -24,6 +24,26 @@ def thank_you_page(request):
 
 ####################### EMAIL #############################
 
+def send_timing_mail(name, email):
+    print(name, email)
+    template = render_to_string('timing_mail.html', 
+                            {'name' : name,})
+    email = EmailMessage(
+        'Cordinator DIC',
+        template,
+        settings.EMAIL_HOST_USER,
+        [email,]
+    )
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
+
+
 def send_username_password_email(username, password, 
                                 email, name, course_name, 
                                 start_date, end_date, course_id):
@@ -253,6 +273,24 @@ def create_user(courseName, courseStartDate):
 
 # UserModel.objects.create(username=username, email=email, password=password, course_name=course_name, date=date)
 # print('User Created')
+
+
+def timing_mail(courseName, courseStartDate):
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
+    print(total)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True)
+    for user in qs:
+        name = user.name
+        email = user.email
+        email_sent = send_timing_mail(name, email)
+        if email_sent:
+            print('email sent to {} on {}'.format(name,email))
+            print('Will Wait for 100 seconds')
+            time.sleep(100)
+        else:
+            print('email failed of {} on {}'.format(name,email))
+
+
 
 
 ####################### MAIN VIEWS ###########################
