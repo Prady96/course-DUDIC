@@ -7,6 +7,7 @@ from django.core.mail import send_mail
 from django.core.mail import EmailMessage
 from django.conf import settings
 from django.template.loader import render_to_string
+from django.contrib.auth.models import User as system_user
 
 ####################### TEST PAGES #######################
 
@@ -24,30 +25,8 @@ def thank_you_page(request):
 
 ####################### EMAIL #############################
 
-def send_timing_mail(name, email):
-    print(name, email)
-    template = render_to_string('timing_mail.html', 
-                            {'name' : name,})
-    email = EmailMessage(
-        'Cordinator DIC',
-        template,
-        settings.EMAIL_HOST_USER,
-        [email,]
-    )
-
-    email.fail_silently = False
-    email.send()
-    if email.send():
-        return True
-    else:
-        return False
-
-
-
-def send_username_password_email(username, password, 
-                                email, name, course_name, 
-                                start_date, end_date, course_id):
-    print(username, password, email, name, course_name, start_date, end_date, course_id)
+def get_poster_link(course_id):
+    """ Get poster link """
 
     if course_id == 'DUDIC01B2':
         course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course6.jpg'
@@ -62,7 +41,35 @@ def send_username_password_email(username, password,
     if course_id == 'CISE01B2':
         course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course-7.jpg'
 
-    template = render_to_string('send_username_password_email_template.html', 
+    return course_poster
+
+def send_timing_mail(name, email):
+    print(name, email)
+    template = render_to_string('timing_mail.html', 
+                            {'name' : name,})
+    email = EmailMessage(
+        'Timing and Slack link for course',
+        template,
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
+    )
+    email.content_subtype = "html"
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
+def send_username_password_email(username, password, 
+                                email, name, course_name, 
+                                start_date, end_date, course_id):
+    print(username, password, email, name, course_name, start_date, end_date, course_id)
+    course_poster = get_poster_link(course_id)
+    
+    template = render_to_string('send_username_password_email.html', 
                                 {'name'       : name,
                                  'course_name': course_name,
                                  'course_id'  : course_id,
@@ -73,11 +80,13 @@ def send_username_password_email(username, password,
                                  'password' : password,})
     
     email = EmailMessage(
-        'Cordinator DIC',
+        'Username and Password for Course DIC',
         template,
-        settings.EMAIL_HOST_USER,
-        [email,]
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
     )
+    email.content_subtype = "html"
 
     email.fail_silently = False
     email.send()
@@ -88,21 +97,10 @@ def send_username_password_email(username, password,
 
 
 def success(request ,name, email, course_name, start_date, end_date, course_id):
+    """After Successful Registeration"""
     print(name, email, course_name, start_date, end_date )
 
-    if course_id == 'DUDIC01B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course6.jpg'
-    if course_id == 'DUDIC02B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course5.jpg'
-    if course_id == 'DUDIC03B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course2-1.jpg'
-    if course_id == 'DUDIC04B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course.jpg'
-    if course_id == 'DUDIC05B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course3.jpg'
-    if course_id == 'CISE01B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course-7.jpg'
-
+    course_poster = get_poster_link(course_id)
 
     template = render_to_string('email_template.html', 
                                 {'name'       : name,
@@ -225,15 +223,16 @@ def username_generator(firstname, age):
 # add course_date for finding exact users
 # ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date='2020-05-19').count()
 # ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date='2020-05-19').filter(email_sent=False)
+
 check = []
-from django.contrib.auth.models import User
+
 def create_user(courseName, courseStartDate):
     # import pdb;pdb.set_trace()
     # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
     total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False).count()
     print(total)
-    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
-    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False)
     # qs = ApplicationModel.objects.filter(course_name__name=courseName)
     for user in qs:
         name = user.name
@@ -241,14 +240,14 @@ def create_user(courseName, courseStartDate):
         age = user.age
         username = username_generator(firstname, age)
         print(username)
-        password = password_generator(age)
+        password = str(password_generator(age))
         print(password)
         email = user.email
         course_name = user.course_name
         start_date = user.course_date.start_date
         end_date = user.course_date.end_date
         course_id = user.course_name.id
-        user_save_qs = User.objects.create_user(username, email, password)
+        user_save_qs = system_user.objects.create_user(username, email, password)
         if user_save_qs:
             user.firstname = firstname
             print("user created successful {}".format(firstname))
@@ -261,8 +260,8 @@ def create_user(courseName, courseStartDate):
                 applicant.update(email_sent=True)
                 UserModel.objects.create(username=username, email=email, password=password, course_name=course_name)
                 print('User Created')
-                print('Will Wait for 500 seconds')
-                time.sleep(100)
+                # print('Will Wait for 500 seconds')
+                # time.sleep(100)
             print('reached')
         else:
             print('user not created')
@@ -276,19 +275,48 @@ def create_user(courseName, courseStartDate):
 
 
 def timing_mail(courseName, courseStartDate):
-    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
+    # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
     print(total)
-    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
     for user in qs:
         name = user.name
         email = user.email
+        from_email = 'course@dudic.io'
         email_sent = send_timing_mail(name, email)
         if email_sent:
             print('email sent to {} on {}'.format(name,email))
-            print('Will Wait for 100 seconds')
-            time.sleep(100)
+            # print('Will Wait for 100 seconds')
+            # time.sleep(100)
         else:
             print('email failed of {} on {}'.format(name,email))
+
+from login.models import *
+def test_mailr():
+    courseName = 'Branding Basics'
+    courseStartDate = '2020-05-26'
+    timing_mail(courseName, courseStartDate)
+
+# import os
+# from sendgrid import SendGridAPIClient
+# from sendgrid.helpers.mail import Mail
+
+# def test_sendGrid_mail():
+#     message = Mail(
+#         from_email='coursel@dudic.io',
+#         to_emails='pradyumg@gmail.com',
+#         subject='Sending with Twilio SendGrid is Fun',
+#         html_content='<strong>and easy to do anywhere, even with Python</strong>',
+#     )
+
+#     sg = SendGridAPIClient('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')
+#     response = sg.send(message)
+#     print(response.status_code)
+#     print(response.body)
+#     print(response.headers)
+#     # except Exception as e:
+#     #     print(e.message)
 
 
 

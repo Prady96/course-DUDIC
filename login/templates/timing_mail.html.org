@@ -1,0 +1,12 @@
+Hi "{{ name }}"
+
+Good Morning!
+All set for your classes today. Please remember to login and attend your first session at 10AM.
+
+Slack Link 
+
+Enjoy!
+Let's make the world a Better place
+#LearningSkillingGrowing
+
+Team DIC
