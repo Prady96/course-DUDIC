@@ -43,6 +43,27 @@ def get_poster_link(course_id):
 
     return course_poster
 
+def rescheduling_mail(name, email):
+    print(name, email)
+    template = render_to_string('reshedule_mail.html', 
+                            {'name' : name,})
+    email = EmailMessage(
+        'Electronics product Designing Course rescheduled on 23-24 May',
+        template,
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
+    )
+    email.content_subtype = "html"
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
+
 def send_timing_mail(name, email):
     print(name, email)
     template = render_to_string('timing_mail.html', 
@@ -110,10 +131,11 @@ def success(request ,name, email, course_name, start_date, end_date, course_id):
                                  'end_date'   : end_date, 
                                  'course_poster' : course_poster})
     email = EmailMessage(
-        'Cordinator DIC',
+        'Registeration Sucessful',
         template,
-        settings.EMAIL_HOST_USER,
-        [email,]
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
     )
 
     email.fail_silently = False
@@ -291,6 +313,25 @@ def timing_mail(courseName, courseStartDate):
             # time.sleep(100)
         else:
             print('email failed of {} on {}'.format(name,email))
+
+def rescheduling_mail_func(courseName, courseStartDate):
+    # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    print(total)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    for user in qs:
+        name = user.name
+        email = user.email
+        from_email = 'course@dudic.io'
+        email_sent = rescheduling_mail(name, email)
+        if email_sent:
+            print('email sent to {} on {}'.format(name,email))
+            # print('Will Wait for 100 seconds')
+            # time.sleep(100)
+        else:
+            print('email failed of {} on {}'.format(name,email))
+
 
 from login.models import *
 def test_mailr():
