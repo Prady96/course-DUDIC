@@ -29,17 +29,17 @@ def get_poster_link(course_id):
     """ Get poster link """
 
     if course_id == 'DUDIC01B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course6.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Design_thinking.pdf'
     if course_id == 'DUDIC02B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course5.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/2D-_3D-Product.pdf'
     if course_id == 'DUDIC03B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course2-1.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Electronics_product.pdf'
     if course_id == 'DUDIC04B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Design_innovation.pdf'
     if course_id == 'DUDIC05B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course3.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Branding_Basics.pdf'
     if course_id == 'CISE01B2':
-        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Innovation-Course-7.jpg'
+        course_poster = 'https://dudic.io/wp-content/uploads/2020/05/Understanding_social.pdf'
 
     return course_poster
 
@@ -64,10 +64,44 @@ def rescheduling_mail(name, email):
         return False
 
 
-def send_timing_mail(name, email):
+def guideline_mail(name, email, course_name, start_date, time, guide_link):
     print(name, email)
+    template = render_to_string('guidelines_mail.html', 
+                        {'name'         : name,
+                            'time'         : time,
+                            'date'         : start_date,
+                            'guide_link'   : guide_link,
+                            'course_name'  : course_name,
+                        })
+    email = EmailMessage(
+        'Guidelines for Course Portal',
+        template,
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
+    )
+    email.content_subtype = "html"
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
+
+
+def send_timing_mail(name, email, course_name, course_id, start_date, time, slack_link):
+    print(name, email)
+    course_poster = get_poster_link(course_id)
     template = render_to_string('timing_mail.html', 
-                            {'name' : name,})
+                            {'name'         : name,
+                             'time'         : time,
+                             'date'         : start_date,
+                             'slack_link'   : slack_link,
+                             'course_poster': course_poster,
+                             'course_name'  : course_name,
+                            })
     email = EmailMessage(
         'Timing and Slack link for course',
         template,
@@ -253,7 +287,7 @@ def create_user(courseName, courseStartDate):
     # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
     total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False).count()
     print(total)
-    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False)
     # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=False)
     # qs = ApplicationModel.objects.filter(course_name__name=courseName)
     for user in qs:
@@ -295,18 +329,27 @@ def create_user(courseName, courseStartDate):
 # UserModel.objects.create(username=username, email=email, password=password, course_name=course_name, date=date)
 # print('User Created')
 
+# def course_time():
+#     time = ''
+#     slack_link = ''
 
 def timing_mail(courseName, courseStartDate):
     # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
     total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
-    print(total)
+    # print(total)
     # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True)
     qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    # qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(name='testworld')
     for user in qs:
         name = user.name
         email = user.email
+        course_name = user.course_name
+        course_id = user.course_name.id
+        start_date = user.course_date.start_date
+        time = '10 AM'
+        slack_link = 'https://join.slack.com/t/understanding-dax1029/shared_invite/zt-eltzgwp1-WeVaYPiIo35UYxQi9Sc3aQ'
         from_email = 'course@dudic.io'
-        email_sent = send_timing_mail(name, email)
+        email_sent = send_timing_mail(name, email, course_name,course_id, start_date, time, slack_link)
         if email_sent:
             print('email sent to {} on {}'.format(name,email))
             # print('Will Wait for 100 seconds')
@@ -325,6 +368,28 @@ def rescheduling_mail_func(courseName, courseStartDate):
         email = user.email
         from_email = 'course@dudic.io'
         email_sent = rescheduling_mail(name, email)
+        if email_sent:
+            print('email sent to {} on {}'.format(name,email))
+            # print('Will Wait for 100 seconds')
+            # time.sleep(100)
+        else:
+            print('email failed of {} on {}'.format(name,email))
+
+
+def guidelines_mail_func(courseName, courseStartDate):
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    #qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
+    for user in qs:
+        name = user.name
+        email = user.email
+        course_name = user.course_name
+        course_id = user.course_name.id
+        start_date = user.course_date.start_date
+        time = '10 AM'
+        guide_link = 'https://dudic.io/wp-content/uploads/2020/05/Guide-to-portal-1.pdf'
+        from_email = 'course@dudic.io'
+        email_sent = guideline_mail(name, email, course_name, start_date, time, guide_link)
         if email_sent:
             print('email sent to {} on {}'.format(name,email))
             # print('Will Wait for 100 seconds')
