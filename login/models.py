@@ -34,6 +34,8 @@ class DateModel(models.Model):
     )
     registeration = models.IntegerField()
 
+    closed_at = models.IntegerField(default=0)
+
     def __str__(self):
         return "{} - {}".format(self.start_date, self.end_date)
 

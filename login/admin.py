@@ -31,8 +31,8 @@ class ApplicationAdminModel(admin.ModelAdmin):
 
 @admin.register(DateModel)
 class DateCourseModel(admin.ModelAdmin):
-    list_display = ['id','start_date','end_date','course_id','registeration']
-    # list_editable = ['registeration',]
+    list_display = ['id','start_date','end_date','course_id','registeration', 'closed_at']
+    # list_editable = ['registeration','closed_at']
     list_filter = ['start_date', 'course_id']
     ordering = ['start_date','course_id']
     save_as = True

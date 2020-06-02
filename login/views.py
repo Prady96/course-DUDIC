@@ -346,8 +346,8 @@ def timing_mail(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = '10 AM'
-        slack_link = 'https://join.slack.com/t/understanding-dax1029/shared_invite/zt-eltzgwp1-WeVaYPiIo35UYxQi9Sc3aQ'
+        time = '11 AM'
+        slack_link = 'https://join.slack.com/t/dis-3sg7195/shared_invite/zt-ercfq9ur-pY6yzRUJAACVM~Dx7dnLYQ'
         from_email = 'course@dudic.io'
         email_sent = send_timing_mail(name, email, course_name,course_id, start_date, time, slack_link)
         if email_sent:
@@ -502,7 +502,7 @@ def logoutUser(request):
     logout(request)
     return redirect('home_page')
 
-
+####################### LOGOUT USER ###########################
 
 
 

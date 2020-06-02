@@ -12,11 +12,14 @@ def course_page(request):
     logged_in_user_email = request.user.email
     applicant = ApplicationModel.objects.filter(email=logged_in_user_email).first()
     course_applied = applicant.course_name
-    filtered_course = Course.objects.filter(course_name=course_applied).first()
+    course_applied_date = applicant.course_date
+    course_applied_start_date = applicant.course_date.start_date
+    # filtered_course = Course.objects.filter(course_name=course_applied).filter(date=course_applied_date).first()
+    filtered_course = Course.objects.filter(course_name=course_applied).filter(date__start_date=course_applied_start_date).first()
     filtered_course_date = filtered_course.date.start_date
     applicant_course_date = applicant.course_date.start_date
     if filtered_course_date == applicant_course_date:
-        course_to_be_displayed = Course.objects.filter(course_name=course_applied)
+        course_to_be_displayed = Course.objects.filter(course_name=course_applied).filter(date__start_date=course_applied_start_date)
         context = {
         'queryset' : course_to_be_displayed,
         }
@@ -31,8 +34,9 @@ def course_page(request):
 
 @login_required(login_url='login/')
 def lecture_page(request, course_name):
+    # import pdb;pdb.set_trace()
     print(course_name)
-    course_name = Course.objects.filter(course_name__name=course_name).first()
+    course_name = Course.objects.filter(course_name__name=course_name)[1:].get()
     lectures = lecture.objects.filter(course_name=course_name.id)
     # qs1 = Course.objects.all() 
     # qs = lecture.objects.all()
