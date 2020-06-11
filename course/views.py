@@ -35,9 +35,11 @@ def course_page(request):
 @login_required(login_url='login/')
 def lecture_page(request, course_name):
     # import pdb;pdb.set_trace()
+    # from nose.tools import set_trace; set_trace()
+    course_applied_start_date = '2020-06-09'
     print(course_name)
-    course_name = Course.objects.filter(course_name__name=course_name)[1:].get()
-    lectures = lecture.objects.filter(course_name=course_name.id)
+    course_name_qs = Course.objects.filter(course_name__name=course_name).filter(date__start_date=course_applied_start_date).get()
+    lectures = lecture.objects.filter(course_name=course_name_qs.id)
     # qs1 = Course.objects.all() 
     # qs = lecture.objects.all()
 

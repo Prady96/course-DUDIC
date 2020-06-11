@@ -346,8 +346,8 @@ def timing_mail(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = '11 AM'
-        slack_link = 'https://join.slack.com/t/dis-3sg7195/shared_invite/zt-ercfq9ur-pY6yzRUJAACVM~Dx7dnLYQ'
+        time = 'Next Class is at 12 PM'
+        slack_link = 'https://join.slack.com/t/dudic02b2/shared_invite/zt-eic5ndg5-15aW1lzRvYwiwRSXgHgAXw'
         from_email = 'course@dudic.io'
         email_sent = send_timing_mail(name, email, course_name,course_id, start_date, time, slack_link)
         if email_sent:
@@ -386,7 +386,8 @@ def guidelines_mail_func(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = '10 AM'
+        time = '11 AM'
+        # guide_link = 'https://dudic.io/wp-content/uploads/2020/06/Tapu-Guide.pdf'
         guide_link = 'https://dudic.io/wp-content/uploads/2020/05/Guide-to-portal-1.pdf'
         from_email = 'course@dudic.io'
         email_sent = guideline_mail(name, email, course_name, start_date, time, guide_link)

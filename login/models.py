@@ -70,6 +70,18 @@ class ApplicationModel(models.Model):
         related_name = 'relateds'
     )
 
+    enable_certificate = models.BooleanField(default=False)
+
+    CERTIFICATE_GRADE =  (
+        ('VGD', 'Very Good'),
+        ('GOD', 'Good'),
+        ('SAT', 'Satisfactory'),
+        ('EXE', 'Excellent'),
+        ('NVA', 'Not Valid'),
+    )
+
+    certificate_grade = models.CharField(max_length=3, choices = CERTIFICATE_GRADE, default='NVA')
+
     date  = models.DateField(auto_now=True)
 
     email_sent = models.BooleanField(default = False)
