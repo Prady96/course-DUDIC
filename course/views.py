@@ -65,3 +65,66 @@ def lecture_page(request, course_name):
 #          'specific' : sq,
 #     }
 #     return render(request, 'main_course_page.html', context)
+
+from django.http import HttpResponse
+from django.views.generic import View
+from .utils import render_to_pdf
+from django.template.loader import get_template
+
+class GeneratePDF(View):
+    def get(self, request, *args, **kwargs):
+        # import pdb; pdb.set_trace()
+        template = get_template('certifcate.html')
+        context = {
+            "invoice_id":123,
+        }
+        html = template.render(context)
+        pdf = render_to_pdf('certifcate.html', context)
+        return HttpResponse(pdf, content_type='application/pdf')
+
+######################### weasy print #############################
+
+from django.http import HttpResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
+
+def generate_pdf(request):
+    context = {
+
+    }
+    html_string = render_to_string('certificate_org.html', context)
+    import pdb; pdb.set_trace()
+    html = HTML(string=html_string)
+    result = html.write_pdf()
+
+    # Creating http response
+    response = HttpResponse(content_type='application/pdf;')
+    response['Content-Disposition'] = 'inline; filename=list_people.pdf'
+    response['Content-Transfer-Encoding'] = 'binary'
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output = open(output.name, 'r')
+        response.write(output.read())
+
+    return response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

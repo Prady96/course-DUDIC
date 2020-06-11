@@ -115,6 +115,28 @@ class UserModel(models.Model):
         verbose_name = 'Selected User'
         verbose_name_plural = 'Selected Users'
 
+class certificates_list(models.Model):
+    """ list of students for which
+     certificates will be created """
+
+    name = models.CharField(max_length=200)
+    course_name = models.CharField(max_length=200)
+    date = models.DateField()
+    
+    CERTIFICATE_GRADE =  (
+        ('VGD', 'Very Good'),
+        ('GOD', 'Good'),
+        ('SAT', 'Satisfactory'),
+        ('EXE', 'Excellent'),
+        ('NVA', 'Not Valid'),
+    )
+    
+    certificate_grade = models.CharField(max_length=3, choices = CERTIFICATE_GRADE, default='NVA')
+
+    email_sent = models.BooleanField(default = False)
+
+
+
 
 
 
