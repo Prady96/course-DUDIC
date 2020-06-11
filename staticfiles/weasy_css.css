@@ -34,7 +34,7 @@ div.logo{
 
 .watermark{
     position: absolute;
-    top: 650px;
+    top: 620px;
     left: 50px;
 
 }
@@ -42,6 +42,17 @@ div.logo{
 .watermark > img{
     width: 450px;
     height: 450px;
+}
+
+.box_certi{
+    position: absolute;
+    top: 5px;
+    right: 30px;
+}
+
+.box_certi > img{
+    width: 180px;
+    height: 220px;
 }
 
 .sign{
@@ -79,7 +90,7 @@ div.logo{
 
 .certi_body__name{
     font-size: 80px;
-    top: 350px;
+    top: 250px;
     left: 70px;
     position: absolute;
 }
@@ -94,7 +105,7 @@ div.logo{
 
 .certi_body__perfce{
     font-size: 24px;
-    top: 580px;
+    top: 620px;
     left: 70px;
     position: absolute;
     width: 75%;
@@ -105,8 +116,19 @@ div.logo{
 }
 
 .certi_Terms{
-    font-size: 14px;
-    top: 1020px;
-    left: 340px;
+    font-size: 10px;
+    top: 1000px;
+    left: 580px;
     position: absolute;
+}
+
+.certi_complen{
+    font-size: 20px;
+    top: 30px;
+    right: 75px;
+    position: absolute;
+    width: 120px;
+    line-height: 30px;
+    height: 200px;
+    /* text-align: center; */
 }

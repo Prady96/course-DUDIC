@@ -86,18 +86,26 @@ class GeneratePDF(View):
 
 from django.http import HttpResponse
 from django.template.loader import render_to_string
-from weasyprint import HTML
+from weasyprint import HTML, CSS
 import tempfile
 
+# if request.POST.get('certi'):
+#     print('user requested certi')
+
+@login_required(login_url='login/')
 def generate_pdf(request):
+    # student_name = 
+    # import pdb; pdb.set_trace()
+    logged_in_user_email = request.user.email
+    applicant = ApplicationModel.objects.filter(email=logged_in_user_email).first()
+    certificate_name = certificates_list.objects.filter(name=applicant.name)
     context = {
-
+        'certs' : certificate_name
     }
-    html_string = render_to_string('certificate_org.html', context)
-    import pdb; pdb.set_trace()
-    html = HTML(string=html_string)
-    result = html.write_pdf()
-
+    html_string = render_to_string('certifcate.html', context)
+    # import pdb; pdb.set_trace()
+    html = HTML(string=html_string, base_url=request.build_absolute_uri())
+    result = html.write_pdf(stylesheets=[CSS(settings.STATIC_ROOT +  '/weasy_css.css')], presentational_hints=True)
     # Creating http response
     response = HttpResponse(content_type='application/pdf;')
     response['Content-Disposition'] = 'inline; filename=list_people.pdf'
@@ -105,7 +113,7 @@ def generate_pdf(request):
     with tempfile.NamedTemporaryFile(delete=True) as output:
         output.write(result)
         output.flush()
-        output = open(output.name, 'r')
+        output = open(output.name, 'rb')
         response.write(output.read())
 
     return response

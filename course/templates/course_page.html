@@ -51,9 +51,17 @@
       </li>
       </div>
     </nav>
+    {% for item in certi %}
+
+    {% endfor %}
+    <div class="container">
+      <div class='col-sm-1 col-md-1 col-lg-3 ml-auto mt-3 pt-3' style="position: relative;">
+      <a href="{% url 'course:generate_pdf' %}"><button  type="submit" class="btn btn-outline-success" name="certi">Download Certificate</button></a>
+    </div>
+    </div>
     
-    
-<div class="container" id="page-container">
+
+    <div class="container" id="page-container">
   {% for item in queryset %}
   <div class="{% if item.available %} row {% else %} disabledDiv {% endif %}" {%if not item.available %} disabled="true" {%endif%}>
     <div class='col-sm-12 col-md-10 col-lg-8 mr-auto mt-3'>
@@ -74,7 +82,7 @@
         {% if item.course_status == 'P' %}
         <a href=""><button type="button" class="btn btn-outline-info">{{item.get_course_status_display}}</button></a>
         {% elif item.course_status == 'C' %}
-        <a href="{% url 'course:lecture_page' course_name=item.course_name %}"><button type="button" class="btn btn-outline-warning">{{item.get_course_status_display}}</button></a>
+        <a href=""><button type="button" class="btn btn-outline-warning">{{item.get_course_status_display}}</button></a>
         {% elif item.course_status == 'R' %}
         <a href="{% url 'course:lecture_page' course_name=item.course_name %}"><button value="{{ item.course_name }}" type="button" class="btn btn-outline-success">{{item.get_course_status_display}}</button></a>
         {% endif %}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,18 +10,21 @@
 <body>
 <!-- <page size="A4">
 </page> -->
-
+{% for value in certs %}
 <div class="bg">
-    <img src='/home/dic/course-DUDIC/images/base_layer_1.png'>
+    <img src="{% static 'certificate/base_layer_1.png' %}">
 </div>
 <div class="logo">
-    <img src='/home/dic/course-DUDIC/images/dudic_logo.png'>
+    <img src="{% static 'certificate/dudic_logo.png' %}">
+</div>
+<div class="box_certi">
+    <img src="{% static 'certificate/box.png' %}">
 </div>
 <div class="watermark">
-    <img src='/home/dic/course-DUDIC/images/blur_image.png'>
+    <img src="{% static 'certificate/blur_image.png' %}">
 </div>
 <div class="sign">
-    <img src='/home/dic/course-DUDIC/images/signature.png'>
+    <img src="{% static 'certificate/signature.png' %}">
 </div>
 
 <div class="sign_undersign">
@@ -37,22 +41,24 @@
         This is to certify that
     </div>
     <div class="certi_body__name">
-         TASHI GUPTA
+         {{ value.name }}
     </div>
     <div class="certi_body__course">
-         has attended the <b>Branding Basics</b> Course
+         has attended the <b>{{ value.course_name }}</b> Course
          in blended learning format from
-         May 25th to 26th 2020.
+         {{ value.start_date }} to {{ value.end_date }}.
     </div>
     <div class="certi_body__perfce">
-         Performance was <span>Very Good</span>
+         The performance was <span>{{ value.certificate_grade }}</span>.
     </div>
 </div>
 
 <div class='certi_Terms'>
     Please match with physical certificate
 </div>
- <!--
-     -->
+<div class="certi_complen">
+    <b>CERTIFICATE OF COMPLETION</b>
+</div>
+{% endfor %}
 </body>
 </html>

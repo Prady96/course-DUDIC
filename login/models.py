@@ -121,17 +121,19 @@ class certificates_list(models.Model):
 
     name = models.CharField(max_length=200)
     course_name = models.CharField(max_length=200)
-    date = models.DateField()
+    start_date = models.DateField(blank=True, null=True)
+    end_date = models.DateField(blank=True, null=True)
+
+    # CERTIFICATE_GRADE =  (
+    #     ('VGD', 'Very Good'),
+    #     ('GOD', 'Good'),
+    #     ('SAT', 'Satisfactory'),
+    #     ('EXE', 'Excellent'),
+    #     ('NVA', 'Not Valid'),
+    # )
     
-    CERTIFICATE_GRADE =  (
-        ('VGD', 'Very Good'),
-        ('GOD', 'Good'),
-        ('SAT', 'Satisfactory'),
-        ('EXE', 'Excellent'),
-        ('NVA', 'Not Valid'),
-    )
-    
-    certificate_grade = models.CharField(max_length=3, choices = CERTIFICATE_GRADE, default='NVA')
+    # certificate_grade = models.CharField(max_length=3, choices = CERTIFICATE_GRADE, default='NVA')
+    certificate_grade = models.CharField(max_length=30, blank=False, null=True)    
 
     email_sent = models.BooleanField(default = False)
 

@@ -487,7 +487,7 @@ def login_page(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('pass')
-
+        # import pdb;pdb.set_trace()
         user = authenticate(request, username=username, password=password)
 
         if user is not None:
@@ -505,9 +505,20 @@ def logoutUser(request):
 
 ####################### LOGOUT USER ###########################
 
-
-
-
+def freeze_certificate():
+    # import pdb; pdb.set_trace()
+    total_certificate = ApplicationModel.objects.filter(enable_certificate=True).count()
+    qs = ApplicationModel.objects.filter(enable_certificate=True)
+    for value in qs:
+        certificates_list.objects.create(
+            name = value.name,
+            course_name = value.course_name,
+            start_date = value.course_date.start_date,
+            end_date = value.course_date.end_date,
+            certificate_grade = value.get_certificate_grade_display(),
+            email_sent = False
+        )
+        print('{} certificate created'.format(value.name))
 
 
 

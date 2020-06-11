@@ -43,3 +43,6 @@ class SelectedUserModel(admin.ModelAdmin):
     search_fields = ['username', 'email']
     ordering = ['username', 'email','course_name']
 
+@admin.register(certificates_list)
+class PassedStudents(admin.ModelAdmin):
+    list_display = ['name', 'course_name', 'start_date','end_date', 'certificate_grade', 'email_sent']
