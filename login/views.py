@@ -48,7 +48,7 @@ def rescheduling_mail(name, email):
     template = render_to_string('reshedule_mail.html', 
                             {'name' : name,})
     email = EmailMessage(
-        'Electronics product Designing Course rescheduled on 23-24 May',
+        'Design Thinking Course rescheduled',
         template,
         settings.FROM_EMAIL,
         [email,],
@@ -62,6 +62,30 @@ def rescheduling_mail(name, email):
         return True
     else:
         return False
+
+def certi_mail(name, email, course_name, certificate_end_date):
+    print(name, course_name,  certificate_end_date)
+    template = render_to_string('certi_mail.html',
+                                {'name' : name,
+                                'course_name' : course_name,
+                                'certificate_end_date' : certificate_end_date,})
+
+    email = EmailMessage(
+    'Certificates',
+    template,
+    settings.FROM_EMAIL,
+    [email,],
+    reply_to=['ask@dudic.io'],
+    )
+    email.content_subtype = "html"
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
+
 
 
 def guideline_mail(name, email, course_name, start_date, time, guide_link):
@@ -346,8 +370,8 @@ def timing_mail(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = 'Next Class is at 12 PM'
-        slack_link = 'https://join.slack.com/t/dudic02b2/shared_invite/zt-eic5ndg5-15aW1lzRvYwiwRSXgHgAXw'
+        time = '11 AM'
+        slack_link = 'https://join.slack.com/t/electronicpro-xyq9530/shared_invite/zt-f3j97exi-bNUEOG6JGuQOwDDFnlg0eQ'
         from_email = 'course@dudic.io'
         email_sent = send_timing_mail(name, email, course_name,course_id, start_date, time, slack_link)
         if email_sent:
@@ -397,6 +421,28 @@ def guidelines_mail_func(courseName, courseStartDate):
             # time.sleep(100)
         else:
             print('email failed of {} on {}'.format(name,email))
+
+
+def certificate_mail(courseName, courseStartDate):
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(enable_certificate=True).count()
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(enable_certificate=True)
+    for user in qs:
+        name = user.name
+        email = user.email
+        course_name = user.course_name
+        certificate_end_date = "October 2020"
+        from_email = 'course@dudic.io'
+        email_sent = certi_mail(name, email, course_name, certificate_end_date)
+        if email_sent:
+            print('email sent to {} on {}'.format(name, email))
+            certi_user = certificates_list.objects.filter(name=name)
+            certi_user.update(email_sent = True)
+            print('reached')
+        else:
+            print('email failed of {} on {}'.format(name,email))
+
+
+
 
 
 from login.models import *

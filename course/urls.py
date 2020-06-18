@@ -7,7 +7,6 @@ urlpatterns = [
     path('', course_page, name='index'),
     path('lectures/<str:course_name>', lecture_page, name='lecture_page'),
     path('login/', views.login_page),
-    path('PDF/', GeneratePDF.as_view()),
+    # path('PDF/', GeneratePDF.as_view()),
     path('testPDF/', generate_pdf, name='generate_pdf'),
-
 ]

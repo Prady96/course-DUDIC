@@ -16,7 +16,7 @@ class LectureForm(ModelForm):
                     'zoom_link','download_resources',
                     'available']
 
-
+# class CertiForm(M)
 
 
 

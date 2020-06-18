@@ -23,5 +23,5 @@ urlpatterns = [
     # path('admin/linkcheck/', include('linkcheck.urls')),
     path('login/', include(('login.urls','login'), namespace='login')),
     path('course/', include(('course.urls','course'), namespace='course')),
-    
+    # path('.well-known/', include('letsencrypt.urls'))
 ]

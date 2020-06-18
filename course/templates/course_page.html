@@ -51,15 +51,21 @@
       </li>
       </div>
     </nav>
-    {% for item in certi %}
 
-    {% endfor %}
     <div class="container">
       <div class='col-sm-1 col-md-1 col-lg-3 ml-auto mt-3 pt-3' style="position: relative;">
-      <a href="{% url 'course:generate_pdf' %}"><button  type="submit" class="btn btn-outline-success" name="certi">Download Certificate</button></a>
+      <a href="{% url 'course:generate_pdf' %}"><button  type="submit" class="btn btn-outline-success" name="certi" {% if not certs %} disabled {% endif %}>Download Certificate</button></a>
     </div>
     </div>
-    
+
+    {% for message in messages %}
+    <div class="alert alert-danger col-md-6 container mt-5" role="alert">
+      <h4 class="alert-heading">Regret!</h4>
+      <strong>{{ message }}.</strong>
+      <hr>
+      <p>Please try this course again at another date. Thank you!</p>
+    </div>
+    {% endfor %}
 
     <div class="container" id="page-container">
   {% for item in queryset %}
