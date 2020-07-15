@@ -88,6 +88,8 @@ class ApplicationModel(models.Model):
 
     timing_mail_sent = models.BooleanField(default = False)
 
+    is_fail = models.BooleanField(default=False)
+
     def __str__(self):
         return self.name
 

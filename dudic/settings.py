@@ -154,6 +154,7 @@ USE_TZ = True
 
 # EMAIL_HOST = 'smtp.zoho.com'
 # EMAIL_HOST_USER = 'course@dudic.io'
+# FROM_EMAIL = 'course@dudic.io'
 # EMAIL_HOST_PASSWORD = 'harebol@123'
 # EMAIL_PORT = 587
 # EMAIL_USE_TLS = True

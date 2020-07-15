@@ -113,6 +113,29 @@ def guideline_mail(name, email, course_name, start_date, time, guide_link):
     else:
         return False
 
+def regret_mailer(name, email, course_name, start_date, end_date):
+    print(name, email, course_name, start_date, end_date)
+    template = render_to_string('regret_mail.html', 
+                        {   'name'         : name,
+                            'start_date'   : start_date,
+                            'course_name'  : course_name,
+                            'end_date'     : end_date
+                        })
+    email = EmailMessage(
+        'Regret Mail',
+        template,
+        settings.FROM_EMAIL,
+        [email,],
+        reply_to=['ask@dudic.io'],
+    )
+    email.content_subtype = "html"
+
+    email.fail_silently = False
+    email.send()
+    if email.send():
+        return True
+    else:
+        return False
 
 
 def send_timing_mail(name, email, course_name, course_id, start_date, time, slack_link):
@@ -370,8 +393,8 @@ def timing_mail(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = '11 AM'
-        slack_link = 'https://join.slack.com/t/electronicpro-xyq9530/shared_invite/zt-f3j97exi-bNUEOG6JGuQOwDDFnlg0eQ'
+        time = '10:00 AM'
+        slack_link = 'https://join.slack.com/t/dudic02b2/shared_invite/zt-f7iv97fa-jPaZB8QrMOmakslhlt~sBg'
         from_email = 'course@dudic.io'
         email_sent = send_timing_mail(name, email, course_name,course_id, start_date, time, slack_link)
         if email_sent:
@@ -380,6 +403,23 @@ def timing_mail(courseName, courseStartDate):
             # time.sleep(100)
         else:
             print('email failed of {} on {}'.format(name,email))
+
+def regret_mail(courseName, courseStartDate):
+    total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(is_fail=True).count()
+    qs = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(is_fail=True)
+    for user in qs:
+        name = user.name
+        email = user.email
+        course_name = user.course_name
+        start_date = user.course_date.start_date
+        end_date = user.course_date.end_date
+        from_email = 'course@dudic.io'
+        email_sent = regret_mailer(name, email, course_name, start_date, end_date)
+        if email_sent:
+            print('email sent to {} on {}'.format(name,email))
+        else:
+            print('email failed of {} on {}'.format(name,email))
+
 
 def rescheduling_mail_func(courseName, courseStartDate):
     # total = ApplicationModel.objects.filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).filter(email_sent=True).count()
@@ -410,7 +450,7 @@ def guidelines_mail_func(courseName, courseStartDate):
         course_name = user.course_name
         course_id = user.course_name.id
         start_date = user.course_date.start_date
-        time = '11 AM'
+        time = '10:00 AM'
         # guide_link = 'https://dudic.io/wp-content/uploads/2020/06/Tapu-Guide.pdf'
         guide_link = 'https://dudic.io/wp-content/uploads/2020/05/Guide-to-portal-1.pdf'
         from_email = 'course@dudic.io'
@@ -430,7 +470,7 @@ def certificate_mail(courseName, courseStartDate):
         name = user.name
         email = user.email
         course_name = user.course_name
-        certificate_end_date = "October 2020"
+        certificate_end_date = "November 2020"
         from_email = 'course@dudic.io'
         email_sent = certi_mail(name, email, course_name, certificate_end_date)
         if email_sent:
@@ -551,10 +591,10 @@ def logoutUser(request):
 
 ####################### LOGOUT USER ###########################
 
-def freeze_certificate():
+def freeze_certificate(courseName, courseStartDate):
     # import pdb; pdb.set_trace()
-    total_certificate = ApplicationModel.objects.filter(enable_certificate=True).count()
-    qs = ApplicationModel.objects.filter(enable_certificate=True)
+    total_certificate = ApplicationModel.objects.filter(enable_certificate=True).filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate).count()
+    qs =  ApplicationModel.objects.filter(enable_certificate=True).filter(course_name__name=courseName).filter(course_date__start_date=courseStartDate)
     for value in qs:
         certificates_list.objects.create(
             name = value.name,

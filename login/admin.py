@@ -21,8 +21,8 @@ class CourseAdminModel(admin.ModelAdmin):
 
 @admin.register(ApplicationModel)
 class ApplicationAdminModel(admin.ModelAdmin):
-    list_display = ['name','education','email','course_name','course_date','date','email_sent','enable_certificate','certificate_grade']
-    list_editable = ['enable_certificate','certificate_grade']
+    list_display = ['name','education','email','course_name','course_date','date','email_sent','is_fail','enable_certificate','certificate_grade']
+    list_editable = ['enable_certificate','certificate_grade','is_fail']
     list_filter = ['course_name', 'course_date']
     ordering = ['name','date']
     search_fields = ['name',]
